@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Business {
     //商家id
-    private String b_id;
+    private int b_id;
     //商家名称
     private String b_name;
     //商家地址
@@ -26,5 +26,7 @@ public class Business {
     private String b_pic;
     //商家营业状态
     private boolean b_state;
+    //商家营业状态
+    private int b_monthly_sales;
 
 }
