@@ -56,7 +56,10 @@ public class UserController {
         return "login";//登录失败  重定向登录页面
     };
 
-
+    @RequestMapping(value = "/",method = RequestMethod.GET)
+    public String lo(HttpServletResponse response, HttpServletRequest request){
+        return "login";//登录失败  重定向登录页面
+    }
 
 
 }
