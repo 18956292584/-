@@ -37,7 +37,7 @@ Author URI: http://www.deathghost.cn
   <div class="Logo">
    <img src="images/logo.jpg" title="DeathGhost" alt="模板">
    <i></i>
-   <span>西安市 [ <a href="#">莲湖区</a> ]</span>
+   <span>学校：西安邮电大学</span>
   </div>
   <div class="Search"> 
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
@@ -57,34 +57,34 @@ Author URI: http://www.deathghost.cn
   <ul class="menu">
    <li><a href="index.html">首页</a></li>
    <li><a href="list.html">订餐</a></li>
-   <li><a href="category.html">积分商城</a></li>
-   <li><a href="article_read.html">关于我们</a></li>
+   <!--<li><a href="category.html">积分商城</a></li>-->
+   <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
 </header>
 <!--Start content-->
 <section class="Cfn">
  <aside class="C-left">
-  <div class="S-time">服务时间：周一~周六<time>09:00</time>-<time>23:00</time></div>
+  <div class="S-time">服务时间：周一~周天<time>06:00</time>-<time>23:00</time></div>
   <div class="C-time">
-   <img src="upload/dc.jpg"/>
+   <img src="../static/upload/dc.jpg"/>
   </div>
-  <a href="list.html" target="_blank"><img src="images/by_button.png"></a>
-  <a href="list.html" target="_blank"><img src="images/dc_button.png"></a>
+  <a href="list.html" target="_blank"><img src="../static/images/by_button.png"></a>
+  <a href="list.html" target="_blank"><img src="../static/images/dc_button.png"></a>
  </aside>
  <div class="F-middle">
  <ul class="rslides f426x240">
-        <li><a href="javascript:"><img src="upload/01.jpg"/></a></li>
-        <li><a href="javascript:"><img src="upload/02.jpg" /></a></li>
-        <li><a href="javascript:"><img src="upload/03.jpg"/></a></li>
+       <tr th:each="food : ${top3food}">
+        <li><a href="javascript:"><img th:src="@{'../static/upload/' + ${food.f_pic}}"/></a></li>
+       </tr>
     </ul>
  </div>
  <aside class="N-right">
   <div class="N-title">公司新闻 <i>COMPANY NEWS</i></div>
-  <ul class="Newslist">
-   <li><i></i><a href="article_read.html" target="_blank" title="这里调用新闻标题...">欢迎访问DeathGhost博客站...</a></li>
-   <li><i></i><a href="article_read.html" target="_blank" title="这里调用新闻标题...">H5WEB前端开发 移动WEB模板设计...</a></li>
-  </ul>
+  <!--<ul class="Newslist">-->
+   <!--<li><i></i><a href="article_read.html" target="_blank" title="这里调用新闻标题...">欢迎访问DeathGhost博客站...</a></li>-->
+   <!--<li><i></i><a href="article_read.html" target="_blank" title="这里调用新闻标题...">H5WEB前端开发 移动WEB模板设计...</a></li>-->
+  <!--</ul>-->
   <ul class="Orderlist" id="UpRoll">
    <li>
    <p>订单编号：2014090912973</p>
@@ -218,7 +218,8 @@ Author URI: http://www.deathghost.cn
      </p>-->
      <div class="DCcontent">
       <tr th:each="business : ${allbusiness}">
-       <a href="shop.html" target="_blank" title="TITLE:店名">
+
+       <a th:href="@{'shop?shopid='+${business.b_id}}" target="_blank" title="TITLE:店名">
         <figure>
          <img th:src="@{'../static/upload/' + ${business.b_pic}}">
          <figcaption>
@@ -227,8 +228,9 @@ Author URI: http://www.deathghost.cn
          </figcaption>
          <p class="p2" >
           店铺评分：
-          <span th:each="i,stat:${#numbers.sequence(1, 6)}">
+          <span th:each="i,stat:${#numbers.sequence(1, 5)}">
            <img th:if="${stat.count< business.b_score}" src="../static/images/star-on.png">
+           <img th:if="${stat.count >business.b_score}" src="../static/images/star-off.png">
           </span>
          </p>
          <p class="p2" th:text="'店铺电话：' + ${business.b_phone}"></p>
@@ -263,18 +265,21 @@ Author URI: http://www.deathghost.cn
  </div>
  </article>
  <aside class="A-infor">
-  <img src="upload/2014911.jpg">
+  <img src="../static/upload/2014911.jpg">
   <div class="usercomment">
    <span>用户菜品点评</span>
    <ul>
-    <li>
-     <img src="upload/01.jpg">
-     用户“DeathGhost”对[ 老李川菜馆 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
-    </li>
-    <li>
-     <img src="upload/02.jpg">
-     用户“DeathGhost”对[ 魏家凉皮 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...
-    </li>
+    <tr th:each="evaluate : ${top10evaluate}">
+     <li >
+      <img th:src="@{'../static/upload/' + ${evaluate.f_pic}}">
+      <span th:utext="'用户“' + ${evaluate.user_name} + '”对[ '+ ${evaluate.b_name} + ']“' + ${evaluate.f_name} + '”评说：' + ${evaluate.e_evaluate} " th:remove="tag">title</span>
+     </li>
+    </tr>
+
+    <!--<li>-->
+     <!--<img src="upload/02.jpg">-->
+     <!--用户“DeathGhost”对[ 魏家凉皮 ]“酸辣土豆丝”评说：味道挺不错，送餐速度挺快...-->
+    <!--</li>-->
    </ul>
   </div>
  </aside>
@@ -288,59 +293,59 @@ Author URI: http://www.deathghost.cn
   
  </div>
 <footer>
- <section class="Otherlink">
-  <aside>
-   <div class="ewm-left">
-    <p>手机扫描二维码：</p>
-    <img src="images/Android_ico_d.gif">
-    <img src="images/iphone_ico_d.gif">
-   </div>
-   <div class="tips">
-    <p>客服热线</p>
-    <p><i>1830927**73</i></p>
-    <p>配送时间</p>
-    <p><time>09：00</time>~<time>22:00</time></p>
-    <p>网站公告</p>
-   </div>
-  </aside>
-  <section>
-    <div>
-    <span><i class="i1"></i>配送支付</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i2"></i>关于我们</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i3"></i>帮助中心</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
-    </ul>
-    </div>
-  </section>
- </section>
+ <!--<section class="Otherlink">-->
+  <!--<aside>-->
+   <!--<div class="ewm-left">-->
+    <!--<p>手机扫描二维码：</p>-->
+    <!--<img src="images/Android_ico_d.gif">-->
+    <!--<img src="images/iphone_ico_d.gif">-->
+   <!--</div>-->
+   <!--<div class="tips">-->
+    <!--<p>客服热线</p>-->
+    <!--<p><i>1830927**73</i></p>-->
+    <!--<p>配送时间</p>-->
+    <!--<p><time>09：00</time>~<time>22:00</time></p>-->
+    <!--<p>网站公告</p>-->
+   <!--</div>-->
+  <!--</aside>-->
+  <!--<section>-->
+    <!--<div>-->
+    <!--<span><i class="i1"></i>配送支付</span>-->
+    <!--<ul>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<span><i class="i2"></i>关于我们</span>-->
+    <!--<ul>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<span><i class="i3"></i>帮助中心</span>-->
+    <!--<ul>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+  <!--</section>-->
+ <!--</section>-->
 <div class="copyright">© 版权所有 2020 
 </footer>
 <style>
 .copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
 </style>
-<div class="copyrights">
-	Collect from <a href="http://www.cssmoban.com/"  title="网站模板">模板之家</a>
-	<a href="https://www.chazidian.com/"  title="查字典">查字典</a>
-</div>
+<!--<div class="copyrights">-->
+	<!--Collect from <a href="http://www.cssmoban.com/"  title="网站模板">模板之家</a>-->
+	<!--<a href="https://www.chazidian.com/"  title="查字典">查字典</a>-->
+<!--</div>-->
 </body>
 </html>

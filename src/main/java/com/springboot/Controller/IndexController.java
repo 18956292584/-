@@ -14,17 +14,32 @@ public class IndexController {
     @Autowired
     IndexService indexService;
 
+    //访问地址： localhost:9090/index/
     @RequestMapping("/")
     public ModelAndView index(){
         ModelAndView model = new ModelAndView("index");
+        //所有食物
         model.addObject("allfood",indexService.allFood());
+        //所有商家
         model.addObject("allbusiness",indexService.allbusiness());
+        //售量前三
+        model.addObject("top3food",indexService.top3fod());
+        //最新10条评价
+        model.addObject("top10evaluate",indexService.top10evaluate());
         return model;
     }
 
-    @RequestMapping("/load")
-    public ModelAndView load(){
-        return new ModelAndView("load");
+    //访问地址： localhost:9090/index/shop?shopid=1
+    @RequestMapping("/shop")
+    public ModelAndView shop(int shopid){
+        ModelAndView modelAndView = new ModelAndView("shop");
+        modelAndView.addObject("shop",indexService.getshop(shopid));
+        modelAndView.addObject("shopfood",indexService.shopfood(shopid));
+        modelAndView.addObject("othershop",indexService.othershop(shopid));
+       // System.out.println(indexService.evaluateByshop(shopid).get(0).e_evaluate);
+        modelAndView.addObject("evaluates",indexService.evaluateByshop(shopid));
+
+        return modelAndView;
     }
 
 }
