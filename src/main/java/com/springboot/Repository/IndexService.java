@@ -26,7 +26,13 @@ public interface IndexService {
     //获取其他商家
     public ArrayList<Business> othershop(int shopid);
 
+    //获取前10条评价
     public ArrayList<EvaluateModel> top10evaluate();
 
     public ArrayList<EvaluateModel> evaluateByshop(int shopid);
+
+    public Food getFood(int foodid);
+
+    public ArrayList<Food> top3food();
+
 }

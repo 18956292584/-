@@ -66,9 +66,12 @@ public interface MainMapper {
             "\tu.user_id = e.e_user_id\n" +
             "AND e.e_food_id = f.f_b_id\n" +
             "AND b.b_id = e.e_id\n" +
-            "AND b.b_id = 1\n" +
+            "AND b.b_id = #{shopid}\n" +
             "ORDER BY\n" +
             "\te.e_date\n" +
             "LIMIT 100;")
     ArrayList<EvaluateModel> evaluateByshop(int shopid);
+
+    @Select("select * from t_food where f_id = #{foodid}")
+    Food getFood(int foodid);
 }

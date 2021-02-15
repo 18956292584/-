@@ -16,6 +16,8 @@ public class Food {
     private int f_sales_volume;
     //食物对应的商家id
     private int f_b_id;
+    //食物对应的商家名称
+    private String f_b_id_name;
     //食物状态
     private boolean f_state;
     //食物说明

@@ -26,7 +26,7 @@ public class Business {
     private String b_pic;
     //商家营业状态
     private boolean b_state;
-    //商家营业状态
+    //商家月售量
     private int b_monthly_sales;
 
 }

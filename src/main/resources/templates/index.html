@@ -55,8 +55,8 @@ Author URI: http://www.deathghost.cn
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="index.html">首页</a></li>
-   <li><a href="list.html">订餐</a></li>
+      <li><a href="javascript:location.reload();">首页</a></li>
+      <li><a href="list">订餐</a></li>
    <!--<li><a href="category.html">积分商城</a></li>-->
    <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
@@ -157,7 +157,7 @@ Author URI: http://www.deathghost.cn
       <tr th:each="food : ${allfood}">
        <!--<td th:text="${user.name}">tyrone</td>-->
        <!--<td th:text="${user.age}">18</td>-->
-       <a href="detailsp.html" target="_blank" title="菜品名称">
+       <a th:href="'detailsp?foodid=' + @{${food.f_id}}" href="detailsp.html" target="_blank" title="菜品名称">
         <figure>
          <img th:src="@{'../static/upload/' + ${food.f_pic}}" >
          <figcaption>
@@ -223,7 +223,7 @@ Author URI: http://www.deathghost.cn
         <figure>
          <img th:src="@{'../static/upload/' + ${business.b_pic}}">
          <figcaption>
-          <span class="title" th:text="${business.b_name}"></span>
+          <span class="title" th:text="${business.b_name}">店名</span>
           <span class="price">月售量：<i th:text="${business.b_monthly_sales}"></i>&nbsp&nbsp份</span>
          </figcaption>
          <p class="p2" >

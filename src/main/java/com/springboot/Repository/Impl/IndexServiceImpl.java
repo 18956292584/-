@@ -56,4 +56,14 @@ public class IndexServiceImpl implements IndexService {
     public ArrayList<EvaluateModel> evaluateByshop(int shopid) {
         return main.evaluateByshop(shopid);
     }
+
+    @Override
+    public Food getFood(int foodid) {
+        return main.getFood(foodid);
+    }
+
+    @Override
+    public ArrayList<Food> top3food() {
+        return main.top3food();
+    }
 }

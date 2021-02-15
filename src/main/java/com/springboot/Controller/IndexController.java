@@ -42,4 +42,25 @@ public class IndexController {
         return modelAndView;
     }
 
+    //访问地址： localhost:9090/index/detailsp?foodid=1
+    @RequestMapping("/detailsp")
+    public ModelAndView detailsp(int foodid){
+        ModelAndView modelAndView = new ModelAndView("detailsp");
+        modelAndView.addObject("food",indexService.getFood(foodid));
+        modelAndView.addObject("top3food",indexService.top3food());
+        modelAndView.addObject("foodEvaluate",indexService.evaluateByshop(foodid));
+
+        return modelAndView;
+    }
+
+    //访问地址： localhost:9090/index/list
+    @RequestMapping("/list")
+    public ModelAndView list(){
+        ModelAndView modelAndView = new ModelAndView("list");
+        //所有商家
+        modelAndView.addObject("allbusiness",indexService.allbusiness());
+
+        return modelAndView;
+    }
+
 }
