@@ -1,20 +1,23 @@
 package com.springboot.Repository.Impl;
 
 import com.springboot.Repository.IndexService;
-import com.springboot.entity.Business;
-import com.springboot.entity.Evaluate;
-import com.springboot.entity.EvaluateModel;
-import com.springboot.entity.Food;
+import com.springboot.entity.*;
+import com.springboot.mapper.GwcMapper;
 import com.springboot.mapper.MainMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class IndexServiceImpl implements IndexService {
     @Autowired
     MainMapper main;
+
+    @Autowired
+    GwcMapper gwc;
 
 
     @Override
@@ -65,5 +68,29 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public ArrayList<Food> top3food() {
         return main.top3food();
+    }
+
+    @Override
+    public HashMap<String,ArrayList<Gwc>> getGwc(int userId) {
+        ArrayList<Gwc> list = gwc.getAllItems(userId);
+
+        HashMap<String,ArrayList<Gwc>> map = new HashMap<String,ArrayList<Gwc>>();
+
+        for(Gwc gwc : list){
+            String str = gwc.getBus_name();
+            System.out.println(str);
+            if(map.containsKey(str)){
+                ArrayList<Gwc> lists =  map.get(str);
+                lists.add(gwc);
+                map.put(str,lists);
+            } else {
+                ArrayList<Gwc> lists =  new ArrayList<>();
+                lists.add(gwc);
+                map.put(str,lists);
+            }
+        }
+
+        System.out.println(map.size());
+        return map;
     }
 }

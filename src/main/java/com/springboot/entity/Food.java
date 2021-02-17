@@ -2,7 +2,6 @@ package com.springboot.entity;
 
 import lombok.Data;
 
-
 //食物模板
 @Data
 public class Food {

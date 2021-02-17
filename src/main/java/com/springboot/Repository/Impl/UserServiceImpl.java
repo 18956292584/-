@@ -2,6 +2,7 @@ package com.springboot.Repository.Impl;
 
 import com.springboot.Repository.UserService;
 import com.springboot.entity.User;
+import com.springboot.mapper.GwcMapper;
 import com.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,10 @@ import java.lang.reflect.Parameter;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper user;
+
+    //购物车接口
+    @Autowired
+    GwcMapper gwc;
 
     /**
      * 根据用户账号查询用户信息
@@ -29,4 +34,18 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    //更改购物车食物数量
+    @Override
+    public void updateNum(int custId, int foodId, int num) {
+         gwc.updateNum(num,custId,foodId);
+    }
+
+    //删除购物车食物
+    @Override
+    public void removeGwc(int custid, int foodid) {
+        System.out.println(custid+"," + foodid);
+        gwc.removeGwc(custid,foodid);
+    }
+
 }

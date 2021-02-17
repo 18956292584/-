@@ -1,10 +1,12 @@
 package com.springboot.Controller;
 
 import com.springboot.Repository.IndexService;
+import com.springboot.Repository.UserService;
 import com.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class IndexController {
     @Autowired
     IndexService indexService;
+    @Autowired
+    UserService userService;
 
     //访问地址： localhost:9090/index/
     @RequestMapping("/")
@@ -61,6 +65,32 @@ public class IndexController {
         modelAndView.addObject("allbusiness",indexService.allbusiness());
 
         return modelAndView;
+    }
+
+    //访问地址： localhost:9090/index/cart?userId=123
+    @RequestMapping("/cart")
+    public ModelAndView cart(int userId){
+        ModelAndView modelAndView = new ModelAndView("cart");
+        //购物车所有商品
+        modelAndView.addObject("map",indexService.getGwc(userId));
+
+        return modelAndView;
+    }
+
+    ////更改购物车数量
+    @RequestMapping("/dealGwcAdd")
+    @ResponseBody
+    public String dealGwcAdd(int custid,int foodid, int count){
+        userService.updateNum(custid,foodid,count);
+        return "succese";
+    }
+
+    //删除购物车
+    @RequestMapping("/removeGwc")
+    @ResponseBody
+    public String removeGwc(int custid,int foodid){
+        userService.removeGwc(custid,foodid);
+        return "succese";
     }
 
 }

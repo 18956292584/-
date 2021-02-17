@@ -1,11 +1,9 @@
 package com.springboot.Repository;
 
-import com.springboot.entity.Business;
-import com.springboot.entity.Evaluate;
-import com.springboot.entity.EvaluateModel;
-import com.springboot.entity.Food;
+import com.springboot.entity.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface IndexService {
     //获取所有食物
@@ -35,4 +33,5 @@ public interface IndexService {
 
     public ArrayList<Food> top3food();
 
+    public HashMap<String,ArrayList<Gwc>> getGwc(int userId);
 }
