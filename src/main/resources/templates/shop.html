@@ -96,7 +96,7 @@ Author URI: http://www.deathghost.cn
   <ul class="menu">
    <li><a href="../index/">首页</a></li>
    <li><a href="list">订餐</a></li>
-   <!--<li><a href="category.html">积分商城</a></li>-->
+   <li><a href="category">美食</a></li>
    <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
@@ -163,6 +163,9 @@ Author URI: http://www.deathghost.cn
 		 <div>
 		  <p th:text="${food.f_name}">酸辣土豆丝</p>
 		  <p th:text="'拖至购物车:￥' + ${food.f_price}" class="AButton">￥50.00</p>
+          <p th:text="${food.f_id}" style="display: none"></p>
+          <!--todo-->
+          <!--<p th:text="${food.f_name}">酸辣土豆丝</p>-->
 		 </div>
 		 </a>
 		</li>

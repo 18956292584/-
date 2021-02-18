@@ -34,4 +34,7 @@ public interface IndexService {
     public ArrayList<Food> top3food();
 
     public HashMap<String,ArrayList<Gwc>> getGwc(int userId);
+
+    public ArrayList<Business> otherShop();
+
 }

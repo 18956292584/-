@@ -12,7 +12,21 @@ import java.util.ArrayList;
 @Mapper
 public interface MainMapper {
 
-    @Select("select * from t_food")
+    @Select("SELECT\n" +
+            "\tf.f_id,\n" +
+            "\tf.f_name,\n" +
+            "\tb.b_name,\n" +
+            "  f.f_b_id,\n" +
+            "\tf.f_sales_volume,\n" +
+            "\tf.f_price,\n" +
+            "  f_pic,\n" +
+            "\tf_introduce,\n" +
+            "  f_stock\n" +
+            "FROM\n" +
+            "\tt_business b,\n" +
+            "\tt_food f\n" +
+            "WHERE\n" +
+            "\tf.f_b_id = b.b_id")
     ArrayList<Food> allfood();
 
     @Select("select * from t_business")
@@ -72,6 +86,24 @@ public interface MainMapper {
             "LIMIT 100;")
     ArrayList<EvaluateModel> evaluateByshop(int shopid);
 
-    @Select("select * from t_food where f_id = #{foodid}")
+    @Select("SELECT\n" +
+            "\tf.f_id,\n" +
+            "\tf.f_name,\n" +
+            "\tb.b_name,\n" +
+            "  f.f_b_id,\n" +
+            "\tf.f_sales_volume,\n" +
+            "\tf.f_price,\n" +
+            "  f_pic,\n" +
+            "\tf_introduce,\n" +
+            "  f_stock\n" +
+            "FROM\n" +
+            "\tt_business b,\n" +
+            "\tt_food f\n" +
+            "WHERE\n" +
+            "\tf.f_b_id = b.b_id\n" +
+            "  and f.f_id = #{foodid}")
     Food getFood(int foodid);
+
+    @Select("select * from t_business order by b_monthly_sales LIMIT 0,10")
+    ArrayList<Business> otherShop();
 }

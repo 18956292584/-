@@ -93,4 +93,9 @@ public class IndexServiceImpl implements IndexService {
         System.out.println(map.size());
         return map;
     }
+
+    @Override
+    public ArrayList<Business> otherShop() {
+        return main.otherShop();
+    }
 }

@@ -1,5 +1,8 @@
 package com.springboot.entity;
 
+import lombok.Data;
+
+@Data
 public class Gwc {
     private int	gwc_id;
     private int	cust_id;
@@ -11,6 +14,22 @@ public class Gwc {
     private String	food_name;
     private String	bus_name;
     private boolean gwc_state;
+
+    @Override
+    public String toString() {
+        return "Gwc{" +
+                "gwc_id=" + gwc_id +
+                ", cust_id=" + cust_id +
+                ", food_id=" + food_id +
+                ", bus_id=" + bus_id +
+                ", food_pic='" + food_pic + '\'' +
+                ", food_price=" + food_price +
+                ", food_count=" + food_count +
+                ", food_name='" + food_name + '\'' +
+                ", bus_name='" + bus_name + '\'' +
+                ", gwc_state=" + gwc_state +
+                '}';
+    }
 
     public boolean isGwc_state() {
         return gwc_state;

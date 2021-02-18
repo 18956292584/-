@@ -72,6 +72,7 @@ $(function(){
   <ul class="menu">
    <li><a href="../index/">首页</a></li>
    <li><a href="list">订餐</a></li>
+   <li><a href="category">美食</a></li>
   </ul>
  </nav>
 </header>
@@ -87,7 +88,7 @@ $(function(){
   <div class="foodtext">
    <div class="foodname_a">
     <h1 th:text="${food.f_name}">酸辣土豆丝</h1>
-    <p>兰州拉面</p>
+    <p th:text="${food.b_name}">兰州拉面</p>
    </div>
    <div class="price_a">
     <p class="price01">价格：￥<span th:text="${food.f_price}">59.00</span></p>
@@ -111,12 +112,20 @@ $(function(){
       <p>送幸福积分</p>
      </li>-->
    </ul>
-   <form action="cart.html">
+   <form action="addGwc">
    <div class="BuyNo">
-    <span>我要买：<input type="number" name="Number" required autofocus min="1" value="1"/>份</span>
+    <span>我要买：<input type="number" name="food_count" required autofocus min="1" value="1"/>份</span>
     <span th:text="'库存：' + ${food.f_stock}">3258</span>
     <div class="Buybutton">
      <input name="" type="submit" value="加入购物车" class="BuyB">
+     <input name="food_id" th:value="${food.f_id}" style="display:none;"/>
+     <input name="cust_id" th:value="${userid}" style="display:none;"/>
+     <input name="bus_id" th:value="${food.f_b_id}" style="display:none;"/>
+     <input name="food_price" th:value="${food.f_price}" style="display:none;"/>
+     <input name="food_pic" th:value="${food.f_pic}" style="display:none;"/>
+     <input name="food_name" th:value="${food.f_name}" style="display:none;"/>
+     <input name="bus_name" th:value="${food.b_name}" style="display:none;"/>
+     <input name="gwc_state" th:value="1" style="display:none;"/>
      <a th:href="@{'shop?shopid='+${food.f_b_id}}"><span class="Backhome">进入店铺首页</span></a>
     </div>
    </div>

@@ -1,6 +1,7 @@
 package com.springboot.Repository;
 
 
+import com.springboot.entity.Gwc;
 import com.springboot.entity.User;
 
 public interface UserService {
@@ -12,4 +13,6 @@ public interface UserService {
 
     //删除购物车食物
     void removeGwc(int custid, int foodid);
+
+    void addGwc(Gwc gwc);
 }

@@ -26,6 +26,9 @@ $(document).ready(function () {
 			$(this).attr("checked", false);
 
 		});
+		$('.gwc_tb2 input[name=maplist]').each(function () {
+			$(this).attr("checked", false);
+		});
 		GetCount();
 	});
 
@@ -38,6 +41,35 @@ $(document).ready(function () {
 		}
 	});
 
+	//
+	$(".gwc_tb2 input[name=maplist]").click(function () {
+		var name = $(this).attr("value");
+
+		$('.gwc_tb2 input[name=maplist]').each(function () {
+			var name1 = $(this).attr("value");
+			if ($(this).attr("checked") && name1 != name) {
+				$(this).attr("checked", false);
+				$('.gwc_tb2 input[name=newslist' + name1 + ']').each(function () {
+					if ($(this).attr("checked")) {
+						$(this).attr("checked", false);
+					}
+				});
+			}
+		});
+
+		$('.gwc_tb2 input[name=newslist' + name + ']').each(function () {
+			if ($(this).attr("checked")) {
+				$(this).attr("checked", false);
+			} else {
+				$(this).attr("checked", true);
+			}
+		});
+
+		GetCount(name);
+	});
+
+
+
 	// 输出
 	$(".gwc_tb2 input[name=newslist]").click(function () {
 
@@ -48,7 +80,7 @@ $(document).ready(function () {
 function GetCount() {
 	var conts = 0;
 	var aa = 0;
-	$(".gwc_tb2 input[name=newslist]").each(function () {
+	$('.gwc_tb2 input[yangtao=newslist]').each(function () {
 		if ($(this).attr("checked")) {
 			for (var i = 0; i < $(this).length; i++) {
 				conts += parseInt($(this).val());
@@ -56,7 +88,6 @@ function GetCount() {
 			}
 		}
 	});
-	//alert(conts);
 	$("#shuliang").text(aa);
 	$("#zong1").html((conts).toFixed(2));
 	$("#jz1").css("display", "none");
@@ -83,7 +114,7 @@ function delcart(parameters,custid) {
 		dataType: "text",
 		async:false,
 		success: function(data) {
-			alert(data);
+			location.reload();
 		}
 	});
 
@@ -133,9 +164,9 @@ function delcart(parameters,custid) {
 	// })
 
 
-function dealAdd(parameters,custid) {
+function dealAdd(parameters,custid,busid) {
 	$('#text' + parameters).val(parseInt($('#text' + parameters).val()) + 1)
-	setTotal(parameters); GetCount(parameters);
+	setTotal(parameters); GetCount(busid);
 
 
 
@@ -147,16 +178,16 @@ function dealAdd(parameters,custid) {
 		dataType: "text",
 		async:false,
 		success: function(data) {
-			alert(data);
+
 		}
 	});
 };
-function dealSub(parameters,custid) {
+function dealSub(parameters,custid,busid) {
 	$('#text' + parameters).val(parseInt($('#text' + parameters).val()) - 1)
 	if (parseInt($('#text' + parameters).val()) <= 1){
 		$('#text' + parameters).val(1);
 	}
-	setTotal(parameters); GetCount(parameters);
+	setTotal(parameters); GetCount(busid);
 
 	var count = $('#text' + parameters).val();
 	$.ajax({
@@ -166,7 +197,7 @@ function dealSub(parameters,custid) {
 		dataType: "text",
 		async:false,
 		success: function(data) {
-			alert(data);
+
 		}
 	});
 };
@@ -176,6 +207,7 @@ function test(){
 	for (var i = 0; i < $eventdx.length; i++){
 		setTotal($eventdx[i].getAttribute('yttmp'));
 	}
+	GetCount();
 }
 
 window.onload=test;
@@ -183,7 +215,7 @@ window.onload=test;
 $(function () {
 	$(".quanxun").click(function () {
 		setTotals();
-		alert(123);
+
 	});
 	function setTotals() {
 		var len = $(".tot");
@@ -192,7 +224,6 @@ $(function () {
 			num = parseInt(num) + parseInt($(len[i]).text());
 
 		}
-		//alert(len.length);
 		$("#zong1").text(parseInt(num).toFixed(2));
 		$("#shuliang").text(len.length);
 	}
@@ -203,7 +234,6 @@ $(function () {
 function setTotal(parameters) {
 
 	var p = $('#price' + parameters).attr("price");
-	console.log($('#text' + parameters))
 	$('#price' + parameters).html((parseInt($('#text' + parameters).val()) * p).toFixed(2));
 	$('#newslist' + parameters).val(parseInt($('#text' + parameters).val()) * p);
 }
@@ -236,11 +266,15 @@ $(function(){
 		onDrop:function(e,source){
 			var name = $(source).find('p:eq(0)').html();
 			var price = $(source).find('p:eq(1)').html();
+			var food_id = $(source).find('p:eq(2)').html();
+			alert(food_id);
 			addProduct(name, parseFloat(price.split('￥')[1]));
 		}
 	});
 });
 
+
+//添加至购物车
 function addProduct(name,price){
 	function add(){
 		for(var i=0; i<data.total; i++){

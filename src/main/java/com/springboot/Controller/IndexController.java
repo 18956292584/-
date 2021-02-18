@@ -2,6 +2,8 @@ package com.springboot.Controller;
 
 import com.springboot.Repository.IndexService;
 import com.springboot.Repository.UserService;
+import com.springboot.entity.Gwc;
+import com.springboot.entity.User;
 import com.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("index")
@@ -21,6 +27,7 @@ public class IndexController {
     //访问地址： localhost:9090/index/
     @RequestMapping("/")
     public ModelAndView index(){
+
         ModelAndView model = new ModelAndView("index");
         //所有食物
         model.addObject("allfood",indexService.allFood());
@@ -40,7 +47,6 @@ public class IndexController {
         modelAndView.addObject("shop",indexService.getshop(shopid));
         modelAndView.addObject("shopfood",indexService.shopfood(shopid));
         modelAndView.addObject("othershop",indexService.othershop(shopid));
-       // System.out.println(indexService.evaluateByshop(shopid).get(0).e_evaluate);
         modelAndView.addObject("evaluates",indexService.evaluateByshop(shopid));
 
         return modelAndView;
@@ -50,9 +56,11 @@ public class IndexController {
     @RequestMapping("/detailsp")
     public ModelAndView detailsp(int foodid){
         ModelAndView modelAndView = new ModelAndView("detailsp");
+        System.out.println(indexService.getFood(foodid).getB_name() + "------------------------");
         modelAndView.addObject("food",indexService.getFood(foodid));
         modelAndView.addObject("top3food",indexService.top3food());
         modelAndView.addObject("foodEvaluate",indexService.evaluateByshop(foodid));
+        modelAndView.addObject("userid",123);
 
         return modelAndView;
     }
@@ -67,6 +75,7 @@ public class IndexController {
         return modelAndView;
     }
 
+    //购物车
     //访问地址： localhost:9090/index/cart?userId=123
     @RequestMapping("/cart")
     public ModelAndView cart(int userId){
@@ -91,6 +100,26 @@ public class IndexController {
     public String removeGwc(int custid,int foodid){
         userService.removeGwc(custid,foodid);
         return "succese";
+    }
+
+
+    //访问地址： localhost:9090/index/category
+    @RequestMapping("/category")
+    public ModelAndView category(){
+        ModelAndView modelAndView = new ModelAndView("category");
+        //购物车所有商品
+        modelAndView.addObject("allfood",indexService.allFood());
+        modelAndView.addObject("othershop",indexService.otherShop());
+        return modelAndView;
+    }
+
+
+    //删除购物车
+    @RequestMapping("/addGwc")
+    public void addGwc(Gwc gwc, HttpServletResponse response,
+                               HttpServletRequest request) throws IOException {
+        userService.addGwc(gwc);
+        response.sendRedirect("cart?userId=" + gwc.getCust_id());
     }
 
 }

@@ -23,6 +23,7 @@ Author URI: http://www.deathghost.cn
  <section class="Topmenubg">
   <div class="Topnav">
    <div class="LeftNav">
+
     <a href="register.html">注册</a>/<a href="login.html">登录</a>
    </div>
    <div class="RightNav">
@@ -52,9 +53,9 @@ Author URI: http://www.deathghost.cn
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="index.html">首页</a></li>
-   <li><a href="list.html">订餐</a></li>
-   <!--<li><a href="category.html">积分商城</a></li>-->
+      <li><a href="../index/">首页</a></li>
+      <li><a href="list">订餐</a></li>
+      <li><a href="category">美食</a></li>
    <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
@@ -64,31 +65,36 @@ Author URI: http://www.deathghost.cn
  <div class="gwc" style=" margin:auto;">
   <table cellpadding="0" cellspacing="0" class="gwc_tb1">
     <tr>
-      <td class="tb1_td1"><input id="Checkbox1" type="checkbox"  class="allselect"/></td>
-      <td class="tb1_td1">全选</td>
+      <td class="tb1_td1"><input id="Checkbox1" type="checkbox"  class="allselect" style="display: none"/></td>
+      <td class="tb1_td1">店铺</td>
       <td class="tb1_td3">商品</td>
       <td class="tb1_td5">数量</td>  
       <td class="tb1_td6">单价</td>
       <td class="tb1_td7">操作</td>
     </tr>
   </table>
-     <span th:each="map:${map}">
-         <tr th:each="food : ${map.value}" >
-          <table cellpadding="0" cellspacing="0" class="gwc_tb2" th:id="'table' + ${food.food_id}">
-              <tr>
-                  <td colspan="7" class="shopname Font14 FontW" th:text="'店铺：' + ${map.key}">店铺：好味来快餐店</td>
-              </tr>
-              <td class="tb2_td1"><input type="checkbox" value="1" name="newslist" th:id="'newslist' + ${food.food_id}"/></td>
-              <td class="tb2_td2"><a href="detailsp.html" target="_blank"><img th:src="@{'../static/upload/' + ${food.food_pic}}"/></a></td>
-              <td class="tb2_td3"><a href="detailsp.html" target="_blank" th:text="${food.food_name}">酸辣土豆丝</a></td>
-              <td class="tb1_td5"><input id="min1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button" value="-" th:onclick="'javascript:dealSub('+${food.food_id} + ','+${food.cust_id}+')'"/>
-                  <input th:id="'text' + ${food.food_id}" name="" class="ytonload" type="text" style=" width:40px;height:28px; text-align:center; border:1px solid #ccc;" th:value="${food.food_count}"  th:attr="yttmp=${food.food_id}"/>
-                  <input id="add1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button" value="+" th:onclick="'javascript:dealAdd('+${food.food_id} + ','+${food.cust_id}+')'"/>
-              </td>
-              <td class="tb1_td6"><label th:id="'price'+${food.food_id}" class="tot" style="color:#ff5500;font-size:14px; font-weight:bold;" th:attr="price=${food.food_price}"></label></td>
-              <td class="tb1_td7"><a href="#"  th:onclick="'javascript:delcart('+${food.food_id} + ','+${food.cust_id}+')'">删除</a></td>
+     <span th:each="map,cStat:${map}">
+         <tr>
+             <table cellpadding="0" cellspacing="0" class="gwc_tb2">
+                   <td class="tb2_td1"><input type="checkbox" value="1" name="maplist" th:value="${cStat.index}"/></td>
+                   <td colspan="7" class="shopname Font14 FontW" th:text="'店铺：' + ${map.key}" style="text-indent: 0em;">店铺：好味来快餐店</td>
+             </table>
 
-          </table>
+             <tr th:each="food : ${map.value}" >
+              <table cellpadding="0" cellspacing="0" class="gwc_tb2" th:id="'table' + ${food.food_id}">
+
+                  <td class="tb2_td1"><input type="checkbox" value="1" th:name="'newslist' + ${cStat.index}" th:id="'newslist' + ${food.food_id}" style="display: none" yangtao="newslist"/></td>
+                  <td class="tb2_td2"><a href="detailsp.html" target="_blank"><img th:src="@{'../static/upload/' + ${food.food_pic}}"/></a></td>
+                  <td class="tb2_td3"><a href="detailsp.html" target="_blank" th:text="${food.food_name}">酸辣土豆丝</a></td>
+                  <td class="tb1_td5"><input id="min1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button" value="-" th:onclick="'javascript:dealSub('+${food.food_id} + ','+${food.cust_id}+')'"/>
+                      <input th:id="'text' + ${food.food_id}" name="" class="ytonload" type="text" style=" width:40px;height:28px; text-align:center; border:1px solid #ccc;" th:value="${food.food_count}"  th:attr="yttmp=${food.food_id}"/>
+                      <input id="add1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button" value="+" th:onclick="'javascript:dealAdd('+${food.food_id} + ','+${food.cust_id}+')'"/>
+                  </td>
+                  <td class="tb1_td6"><label th:id="'price'+${food.food_id}" class="tot" style="color:#ff5500;font-size:14px; font-weight:bold;" th:attr="price=${food.food_price}"></label></td>
+                  <td class="tb1_td7"><a href="#"  th:onclick="'javascript:delcart('+${food.food_id} + ','+${food.cust_id}+')'">删除</a></td>
+
+              </table>
+             </tr>
          </tr>
      </span>
   <!--<table cellpadding="0" cellspacing="0" class="gwc_tb2" id="table2">-->
@@ -110,13 +116,13 @@ Author URI: http://www.deathghost.cn
   <!--</table>-->
   <table cellpadding="0" cellspacing="0" class="gwc_tb3">
     <tr>
-      <td class="tb1_td1"><input id="checkAll" class="allselect" type="checkbox" /></td>
-      <td class="tb1_td1">全选</td>
-      <td class="tb3_td1"><input id="invert" type="checkbox" />
-        反选
-        <input id="cancel" type="checkbox" />
-        取消 </td>
-      <td class="tb3_td2 GoBack_Buy Font14"><a href="#" target="_blank">继续购物</a></td>
+      <td class="tb1_td1"><input id="checkAll" class="allselect" type="checkbox" style="display: none"/></td>
+      <td class="tb1_td1" style="display: none">全选</td>
+      <td class="tb3_td1" ><input id="invert" type="checkbox" style="display: none"/>
+
+        <input id="cancel" type="checkbox" style="display: none"/>
+         </td>
+      <td class="tb3_td2 GoBack_Buy Font14"><a href="../index/" target="_blank">继续购物</a></td>
       <td class="tb3_td2">已选商品
         <label id="shuliang" style="color:#ff5500;font-size:14px; font-weight:bold;">0</label>
         件</td>
