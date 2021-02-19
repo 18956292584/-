@@ -12,7 +12,7 @@
 <script type="text/javascript" src="../static/js/public.js"></script>
 <script type="text/javascript" src="../static/js/jquery.js"></script>
 <script type="text/javascript" src="../static/js/jqpublic.js"></script>
-<script type="text/javascript" src="../static/js/cart.js"></script>
+<script th:inline="javascript" src="../static/js/cart.js"></script>
 <!--
 Author: DeathGhost
 Author URI: http://www.deathghost.cn
@@ -83,7 +83,7 @@ Author URI: http://www.deathghost.cn
              <tr th:each="food : ${map.value}" >
               <table cellpadding="0" cellspacing="0" class="gwc_tb2" th:id="'table' + ${food.food_id}">
 
-                  <td class="tb2_td1"><input type="checkbox" value="1" th:name="'newslist' + ${cStat.index}" th:id="'newslist' + ${food.food_id}" style="display: none" yangtao="newslist"/></td>
+                  <td class="tb2_td1"><input type="checkbox" value="1" th:name="'newslist' + ${cStat.index}" th:id="'newslist' + ${food.food_id}" style="display: none" yangtao="newslist" th:attr="gwcid=${food.gwc_id}"/></td>
                   <td class="tb2_td2"><a href="detailsp.html" target="_blank"><img th:src="@{'../static/upload/' + ${food.food_pic}}"/></a></td>
                   <td class="tb2_td3"><a href="detailsp.html" target="_blank" th:text="${food.food_name}">酸辣土豆丝</a></td>
                   <td class="tb1_td5"><input id="min1" name="" style="width:30px; height:30px;border:1px solid #ccc;" type="button" value="-" th:onclick="'javascript:dealSub('+${food.food_id} + ','+${food.cust_id}+')'"/>
@@ -129,7 +129,7 @@ Author URI: http://www.deathghost.cn
       <td class="tb3_td3">合计(不含运费):<span>￥</span><span style=" color:#ff5500;">
         <label id="zong1" style="color:#ff5500;font-size:14px; font-weight:bold;">0.00</label>
         </span></td>
-      <td class="tb3_td4"><span id="jz1">结算</span><a href="confirm_order.html" style=" display:none;"  class="jz2" id="jz2">结算</a></td>
+      <td class="tb3_td4"><span id="jz1">结算</span><a style=" display:none;" class="jz2" id="jz2" onclick="confirm_order()">结算</a></td>
     </tr>
   </table>
 </div>
@@ -188,3 +188,23 @@ Author URI: http://www.deathghost.cn
 </footer>
 </body>
 </html>
+
+<script th:inline="javascript">
+    function confirm_order(){
+        var order = "";
+        $('.gwc_tb2 input[name=maplist]').each(function () {
+            if ($(this).attr("checked") ) {
+                var name = $(this).attr("value");
+                $('.gwc_tb2 input[name=newslist' + name + ']').each(function () {
+                    if ($(this).attr("checked")) {
+                        order += $(this).attr("gwcid") + "AND";
+                    }
+                });
+            }
+        });
+        var userId = [[${userId}]];
+        window.location.href='confirm_order?userId=' + userId + '&gwcId=' + order;
+    }
+</script>
+
+

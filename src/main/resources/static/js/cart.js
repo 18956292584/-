@@ -1,25 +1,25 @@
 $(document).ready(function () {
-	// 全选        
-	$(".allselect").click(function () {
-		$(".gwc_tb2 input[name=newslist]").each(function () {
-			$(this).attr("checked", true);
-		});
-		GetCount();
-	});
+	// // 全选
+	// $(".allselect").click(function () {
+	// 	$(".gwc_tb2 input[name=newslist]").each(function () {
+	// 		$(this).attr("checked", true);
+	// 	});
+	// 	GetCount();
+	// });
 
-	//反选
-	$("#invert").click(function () {
-		$(".gwc_tb2 input[name=newslist]").each(function () {
-			if ($(this).attr("checked")) {
-				$(this).attr("checked", false);
-
-			} else {
-				$(this).attr("checked", true);
-
-			} 
-		});
-		GetCount();
-	});
+	// //反选
+	// $("#invert").click(function () {
+	// 	$(".gwc_tb2 input[name=newslist]").each(function () {
+	// 		if ($(this).attr("checked")) {
+	// 			$(this).attr("checked", false);
+	//
+	// 		} else {
+	// 			$(this).attr("checked", true);
+	//
+	// 		}
+	// 	});
+	// 	GetCount();
+	// });
 	//取消
 	$("#cancel").click(function () {
 		$(".gwc_tb2 input[name=newslist]").each(function () {
@@ -164,9 +164,9 @@ function delcart(parameters,custid) {
 	// })
 
 
-function dealAdd(parameters,custid,busid) {
+function dealAdd(parameters,custid) {
 	$('#text' + parameters).val(parseInt($('#text' + parameters).val()) + 1)
-	setTotal(parameters); GetCount(busid);
+	setTotal(parameters); GetCount();
 
 
 
@@ -182,12 +182,12 @@ function dealAdd(parameters,custid,busid) {
 		}
 	});
 };
-function dealSub(parameters,custid,busid) {
+function dealSub(parameters,custid) {
 	$('#text' + parameters).val(parseInt($('#text' + parameters).val()) - 1)
 	if (parseInt($('#text' + parameters).val()) <= 1){
 		$('#text' + parameters).val(1);
 	}
-	setTotal(parameters); GetCount(busid);
+	setTotal(parameters); GetCount();
 
 	var count = $('#text' + parameters).val();
 	$.ajax({
@@ -296,3 +296,4 @@ function addProduct(name,price){
 	$('#cartcontent').datagrid('loadData', data);
 	$('div.cart .total').html('共计金额: ￥'+totalCost);
 }
+

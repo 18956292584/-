@@ -1,8 +1,11 @@
 package com.springboot.Repository.Impl;
 
 import com.springboot.Repository.UserService;
+import com.springboot.entity.Address;
 import com.springboot.entity.Gwc;
+import com.springboot.entity.OrderModel;
 import com.springboot.entity.User;
+import com.springboot.mapper.AddressMapper;
 import com.springboot.mapper.GwcMapper;
 import com.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -21,6 +25,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     GwcMapper gwc;
 
+    //收货地址接口
+    @Autowired
+    AddressMapper address;
     /**
      * 根据用户账号查询用户信息
      * 得到用户信息 比对 输入的密码是否与用户信息密码一致
@@ -59,6 +66,25 @@ public class UserServiceImpl implements UserService {
         } else {
             gwc.add(g);
         }
+    }
+
+    @Override
+    public OrderModel dealConfirmOrder(int userId, String gwcId) {
+        String[] str = gwcId.split("AND");
+        OrderModel model = new OrderModel();
+        double num = 0;
+        for (String st : str){
+            Gwc g = gwc.findByUserId(Integer.valueOf(st),userId);
+            num += g.getFood_count()*g.getFood_price();
+            model.getOrder_food().add(g);
+        }
+        model.setOrder_price(num);
+        return model;
+    }
+
+    @Override
+    public List<Address> getAddress(int userId) {
+        return address.getAddress(userId);
     }
 
 }

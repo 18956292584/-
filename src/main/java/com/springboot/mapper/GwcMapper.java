@@ -29,4 +29,7 @@ public interface GwcMapper {
 
     @Select("SELECT food_count FROM t_gwc WHERE food_id = #{food_id} and cust_id = #{cust_id}")
     ArrayList<Integer> findById( @Param("food_id")int food_id, @Param("cust_id")int cust_id);
+
+    @Select("SELECT * FROM t_gwc WHERE gwc_id = #{gwc_id} and cust_id = #{cust_id} and gwc_state != 0")
+    Gwc findByUserId(@Param("gwc_id")int gwc_id, @Param("cust_id")int cust_id);
 }
