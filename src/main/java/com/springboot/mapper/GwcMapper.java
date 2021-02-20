@@ -24,12 +24,18 @@ public interface GwcMapper {
     ArrayList<Gwc> getAllItems(int custId);
 
 
-    @Update("update t_gwc set gwc_state = 0 where cust_id = #{cust_id} and food_id = #{food_id}")
+    @Update("DELETE from t_gwc where cust_id = = #{cust_id} and food_id = #{food_id}")
     void removeGwc( @Param("cust_id")int cust_id, @Param("food_id")int food_id);
 
-    @Select("SELECT food_count FROM t_gwc WHERE food_id = #{food_id} and cust_id = #{cust_id}")
+    @Select("SELECT food_count FROM t_gwc WHERE food_id = #{food_id} and cust_id = #{cust_id} and gwc_state != 0")
     ArrayList<Integer> findById( @Param("food_id")int food_id, @Param("cust_id")int cust_id);
 
     @Select("SELECT * FROM t_gwc WHERE gwc_id = #{gwc_id} and cust_id = #{cust_id} and gwc_state != 0")
     Gwc findByUserId(@Param("gwc_id")int gwc_id, @Param("cust_id")int cust_id);
+
+    @Select("SELECT bus_id FROM t_gwc WHERE gwc_id = #{gwc_id}")
+    Integer getBusIdByGwcId(int gwc_id);
+
+    @Update("update t_gwc set gwc_state = 0 where cust_id = #{order_user} and bus_id = #{order_bus}")
+    void updateState(@Param("order_user")int order_user, @Param("order_bus")int order_bus);
 }

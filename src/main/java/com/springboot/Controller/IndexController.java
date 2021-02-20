@@ -1,8 +1,11 @@
 package com.springboot.Controller;
 
+import com.alipay.api.AlipayApiException;
+import com.springboot.Repository.Impl.PayAction;
 import com.springboot.Repository.IndexService;
 import com.springboot.Repository.UserService;
 import com.springboot.entity.Gwc;
+import com.springboot.entity.Order;
 import com.springboot.entity.OrderModel;
 import com.springboot.entity.User;
 import com.springboot.mapper.UserMapper;
@@ -133,6 +136,38 @@ public class IndexController {
         OrderModel orderModel = userService.dealConfirmOrder(userId,gwcId);
         modelAndView.addObject("orderModel",orderModel);
         modelAndView.addObject("address",userService.getAddress(userId));
+
+        return modelAndView;
+    }
+
+
+    //访问地址： localhost:9090/index/cart?userId=123
+    @RequestMapping("/submitOrder")
+    @ResponseBody
+    public String submit(Order order){
+        String res = userService.submitOrder(order);
+        return res;
+    }
+
+    //访问地址： localhost:9090/index/cart?userId=123
+    @RequestMapping("/respond")
+    public ModelAndView respond(String orderid,double order_price){
+        ModelAndView modelAndView = new ModelAndView("respond");
+        String res = null;
+        try {
+            res = PayAction.payAction(order_price,"校园外卖",orderid);
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+        modelAndView.addObject("res",res);
+        return modelAndView;
+    }
+
+    //访问地址： localhost:9090/index/cart?userId=123
+    @RequestMapping("/request")
+    public ModelAndView request(){
+        ModelAndView modelAndView = new ModelAndView("respond");
+
 
         return modelAndView;
     }

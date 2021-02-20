@@ -1,19 +1,21 @@
 package com.springboot.Repository.Impl;
 
+import com.alipay.api.AlipayApiException;
 import com.springboot.Repository.UserService;
-import com.springboot.entity.Address;
-import com.springboot.entity.Gwc;
-import com.springboot.entity.OrderModel;
-import com.springboot.entity.User;
+import com.springboot.entity.*;
 import com.springboot.mapper.AddressMapper;
 import com.springboot.mapper.GwcMapper;
+import com.springboot.mapper.OrderMapper;
 import com.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Parameter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -28,6 +30,10 @@ public class UserServiceImpl implements UserService {
     //收货地址接口
     @Autowired
     AddressMapper address;
+
+    //订单接口
+    @Autowired
+    OrderMapper orderMapper;
     /**
      * 根据用户账号查询用户信息
      * 得到用户信息 比对 输入的密码是否与用户信息密码一致
@@ -78,13 +84,32 @@ public class UserServiceImpl implements UserService {
             num += g.getFood_count()*g.getFood_price();
             model.getOrder_food().add(g);
         }
+        int order_bus = gwc.getBusIdByGwcId(Integer.valueOf(str[0]));
         model.setOrder_price(num);
+        model.setOrder_user(userId);
+        model.setOrder_bus(order_bus);
+
         return model;
     }
 
     @Override
     public List<Address> getAddress(int userId) {
         return address.getAddress(userId);
+    }
+
+    @Override
+    public String submitOrder(Order order) {
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        order.setOrder_date(ft.format(date));
+        Integer orderId = UUID.randomUUID().toString().hashCode();
+        orderId = orderId < 0 ? -orderId : orderId;
+        String uuid = String.valueOf(orderId);
+        order.setOrder_id(uuid);
+        orderMapper.addOrder(order);
+        gwc.updateState(order.getOrder_user(),order.getOrder_bus());
+
+        return uuid;
     }
 
 }

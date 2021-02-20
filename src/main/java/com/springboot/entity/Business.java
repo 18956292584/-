@@ -28,5 +28,6 @@ public class Business {
     private boolean b_state;
     //商家月售量
     private int b_monthly_sales;
-
+    //商家配送费
+    private boolean b_dismoney;
 }

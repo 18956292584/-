@@ -9,8 +9,8 @@
 <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
 <meta name="author" content="DeathGhost"/>
 <link href="../static/style/style.css" rel="stylesheet" type="text/css" />
+ <script type="text/javascript" src="../static/js/jquery.js"></script>
 <script type="text/javascript" src="../static/js/public.js"></script>
-<script type="text/javascript" src="../static/js/jquery.js"></script>
 <script type="text/javascript" src="../static/js/jqpublic.js"></script>
 <!--
 Author: DeathGhost
@@ -88,7 +88,7 @@ Author URI: http://www.deathghost.cn
    <ul class="address">
     <tr th:each="ad:${address}">
       <!--<li id="style2"><input type="radio" value="" id="2" name="rdColor" onclick="changeColor(2)"/><label for="2"> 陕西省 西安市 雁塔区 丈八路22号（孙先生收）<span class="fontcolor" th:text="${ad.a_phone}">183092***73</span></label></li>-->
-      <li id="style1"><input type="radio" value="" id="1" name="rdColor" onclick="changeColor(1)"/><label for="1" th:utext="'&nbsp;&nbsp;' + ${ad.a_address} + '&nbsp(' + ${ad.a_name} + ')&nbsp;&nbsp;&nbsp;&nbsp;' + ${ad.a_phone}"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）</label></li>
+      <li id="style1"><input type="radio" th:value="${ad.a_id}" id="1" name="rdColor" onclick="changeColor(1)"/><label for="1" th:utext="'&nbsp;&nbsp;' + ${ad.a_address} + '&nbsp(' + ${ad.a_name} + ')&nbsp;&nbsp;&nbsp;&nbsp;' + ${ad.a_phone}"> 浙江省 杭州市 余杭区 航海路1588号（孙先生收）</label></li>
     </tr>
     <li><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"><img src="../static/images/newaddress.png"/></a></li>
    </ul>
@@ -148,7 +148,7 @@ Author URI: http://www.deathghost.cn
     </tr>
    </table>
     <div class="Order_M">
-     <p><em>订单附言:</em><input name=""  type="text"></p>
+     <p><em>订单附言:</em><input name=""  id="order_message" type="text"></p>
      <!--<p><em>优惠券:</em>-->
      <!--<select name="">-->
       <!--&lt;!&ndash;<option>￥10元优惠券</option>&ndash;&gt;-->
@@ -158,28 +158,53 @@ Author URI: http://www.deathghost.cn
     <div class="Sum_infor">
     <!--<p class="p1">配送费用：￥0.00+商品费用：￥177.00-优惠券：￥10.00</p>-->
     <p class="p2">合计：<span th:text="'￥' + ${orderModel.order_price}">167.00</span></p>
-    <input type="submit" value="支付订单" class="p3button">
+    <input  value="支付订单" class="p3button">
     </div>
    </div>
    </form>
  </div>
 </section>
-<script>
+<script th:inline="javascript">
 //Test code,You can delete this script /2014-9-21DeathGhost/
-$(document).ready(function(){
- var submitorder =$.noConflict();
- submitorder(".p3button").click(function(){
-	 submitorder("#Cflow").hide();
-	 submitorder("#Aflow").show();
-	 });
-});
+      var order_address = null;
+      $(".p3button").click(function(){
+       $("input[name=rdColor").each(function () {
+            if ($(this).attr("checked") ) {
+             order_address = $(this).attr("value");
+            }
+       });
+       if(order_address == null){
+          return;
+       }
+       var order_bus = [[${orderModel.order_bus}]];
+       var order_user = [[${orderModel.order_user}]];
+       var order_price = [[${orderModel.order_price}]];
+       var order_message = $("#order_message").attr("value");
+
+       $.ajax({
+           url: "/index/submitOrder",
+           data: {order_address: order_address,order_bus:order_bus,order_user:order_user,order_price:order_price,
+            order_message:order_message},
+           type: "POST",
+           dataType: "text",
+           async:false,
+           success: function(data) {
+                $("#orderid").html(data);
+                $('#lijizhifu').attr('href','respond?orderid='+data+'&order_price=' + order_price);
+                $("#Cflow").hide();
+                $("#Aflow").show();
+           }
+       });
+
+      });
+
 </script>
 <section class="Psection MT20 Textcenter" style="display:none;" id="Aflow">
   <!-- 订单提交成功后则显示如下 -->
   <p class="Font14 Lineheight35 FontW">恭喜你！订单提交成功！</p>
-  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed">201409205134</span></p>
-  <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed">￥359</span></p>
-  <p><button type="button" class="Lineheight35"><a href="#" target="_blank">支付宝立即支付</a></button><button type="button" class="Lineheight35"><a href="user_center.html">进入用户中心</button></p>
+  <p class="Font14 Lineheight35 FontW">您的订单编号为：<span class="CorRed" id="orderid">201409205134</span></p>
+  <p class="Font14 Lineheight35 FontW">共计金额：<span class="CorRed" th:text="'￥' + ${orderModel.order_price}">￥359</span></p>
+  <p><button type="button" class="Lineheight35"><a id="lijizhifu" target="_blank">支付宝立即支付</a></button><button type="button" class="Lineheight35"><a href="user_center.html">进入用户中心</button></p>
 </section>
 <!--End content-->
 <div class="F-link">

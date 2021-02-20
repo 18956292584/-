@@ -1,10 +1,7 @@
 package com.springboot.Repository;
 
 
-import com.springboot.entity.Address;
-import com.springboot.entity.Gwc;
-import com.springboot.entity.OrderModel;
-import com.springboot.entity.User;
+import com.springboot.entity.*;
 
 import java.util.List;
 
@@ -23,4 +20,6 @@ public interface UserService {
     OrderModel dealConfirmOrder(int userId, String gwcId);
 
     List<Address> getAddress(int userId);
+
+    String submitOrder(Order order);
 }
