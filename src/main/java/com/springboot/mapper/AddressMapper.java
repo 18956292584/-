@@ -12,4 +12,7 @@ public interface AddressMapper {
 
     @Select("select * from t_address where a_user = #{userId} and a_state != 0")
     List<Address> getAddress(int userId);
+
+    @Select("select * from t_address where a_id = #{order_address} and a_state != 0")
+    Address getAddressByid(int order_address);
 }

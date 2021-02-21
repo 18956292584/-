@@ -5,14 +5,57 @@ import java.util.List;
 
 public class OrderModel {
     int order_bus;
+    String order_busName;
     int order_user;
+    String order_userName;
+    Address address;
+    Business business;
     double order_price;
     List<Gwc> order_food;
+    Order order;
 
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     public OrderModel(){
-
         order_food = new ArrayList<>();
+    }
+
+    public String getOrder_busName() {
+        return order_busName;
+    }
+
+    public void setOrder_busName(String order_busName) {
+        this.order_busName = order_busName;
+    }
+
+    public String getOrder_userName() {
+        return order_userName;
+    }
+
+    public void setOrder_userName(String order_userName) {
+        this.order_userName = order_userName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public int getOrder_bus() {

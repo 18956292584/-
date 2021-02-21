@@ -3,17 +3,15 @@ package com.springboot.Controller;
 import com.alipay.api.AlipayApiException;
 import com.springboot.Repository.Impl.PayAction;
 import com.springboot.Repository.IndexService;
+import com.springboot.Repository.OrderService;
 import com.springboot.Repository.UserService;
 import com.springboot.entity.Gwc;
 import com.springboot.entity.Order;
 import com.springboot.entity.OrderModel;
-import com.springboot.entity.User;
-import com.springboot.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +25,8 @@ public class IndexController {
     IndexService indexService;
     @Autowired
     UserService userService;
+    @Autowired
+    OrderService orderService;
 
     //访问地址： localhost:9090/index/
     @RequestMapping("/")
@@ -163,12 +163,24 @@ public class IndexController {
         return modelAndView;
     }
 
-    //访问地址： localhost:9090/index/cart?userId=123
-    @RequestMapping("/request")
-    public ModelAndView request(){
-        ModelAndView modelAndView = new ModelAndView("respond");
+    //访问地址： localhost:9090/index/user_center?userId=123
+    @RequestMapping("/user_center")
+    public ModelAndView request(int userId){
+        ModelAndView modelAndView = new ModelAndView("user_center");
+        modelAndView.addObject("dfk",orderService.dfk(userId,0));
+        modelAndView.addObject("dfh",orderService.dfk(userId,1));
+        modelAndView.addObject("dsh",orderService.dfk(userId,2));
+        modelAndView.addObject("dpj",orderService.dfk(userId,3));
 
+        return modelAndView;
+    }
 
+    //访问地址： localhost:9090/index/user_center?userId=123
+    @RequestMapping("/user_order")
+    public ModelAndView request(int order_id,int order_state){
+        ModelAndView modelAndView = new ModelAndView("user_order");
+        modelAndView.addObject("orderfoods",orderService.getorderModel(order_id));
+        modelAndView.addObject("order_state",order_state);
         return modelAndView;
     }
 

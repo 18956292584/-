@@ -9,7 +9,15 @@ public class Order {
     int order_user;
     String order_date;
     boolean order_isOk;
+    int order_state;
 
+    public int getOrder_state() {
+        return order_state;
+    }
+
+    public void setOrder_state(int order_state) {
+        this.order_state = order_state;
+    }
 
     public String getOrder_id() {
         return order_id;

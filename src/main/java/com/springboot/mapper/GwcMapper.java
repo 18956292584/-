@@ -38,4 +38,7 @@ public interface GwcMapper {
 
     @Update("update t_gwc set gwc_state = 0 where cust_id = #{order_user} and bus_id = #{order_bus}")
     void updateState(@Param("order_user")int order_user, @Param("order_bus")int order_bus);
+
+    @Select("select * from t_gwc where cust_id = #{custId} and bus_id = #{bus_id}")
+    ArrayList<Gwc> getAllItemsByBusId(@Param("bus_id")int order_bus,@Param("custId")int cust_id);
 }

@@ -539,7 +539,7 @@ code::selection {background:#dddddd;}
 .U-article .usercenter .U-header p{width:790px;margin-left:15px;float:left;line-height:26px;}
 .U-article .usercenter .U-header ul{margin-left:15px;width:790px;float:left;height:20px;}
 .U-article .usercenter .U-header ul li{height:25px;line-height:25px;}
-.U-article .usercenter .s-States{border:1px #e4eaee solid;background:#fff;}
+.U-article .usercenter .s-States{border:1px #e4eaee solid;background:#dfdfdf;}
 .U-article .usercenter .s-States li{border-right:1px #dddddd solid;float:left;width:19%;height:50px;line-height:50px;text-align:center;}
 /*U-MY ORDER*/
 .U-article .Myorder{width:910px;height:auto;}
