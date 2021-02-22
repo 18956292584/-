@@ -5,11 +5,7 @@ import com.springboot.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,40 +22,57 @@ public class UserController {
     UserService userService;
 
     /**
-     * 登录成功跳转主页面
-     * @param user_id
-     * @param user_password
-     * @param model
+     * 方法用于跳转注册页面
      * @return
      */
-    @RequestMapping(value = "/load",method = RequestMethod.GET)
-    @ResponseBody
-    public String login(@RequestParam("user_id") String user_id,
-                        @RequestParam("user_password") String user_password,
-                        Model model,
-                        HttpServletResponse response,
-                        HttpServletRequest request){
-        User user = userService.dealLogin(user_id, user_password);
-        //创建session
-        HttpSession session = request.getSession();
-        if (user!=null) {
-            //登录的用户信息保留三天
-            String uuId = UUID.randomUUID().toString().replace("-", "");
-            Cookie cookie = new Cookie("msg", uuId);
-            cookie.setMaxAge(60 * 60 * 24 * 3);//保留用户信息时间
-            cookie.setHttpOnly(false);
-            cookie.setPath("/");
-            response.addCookie(cookie);//发送到客户端
-            return "index";//登录成功  进入主页面
-        }
-        model.addAttribute("msg","登录失败");
-        return "login";//登录失败  重定向登录页面
-    };
-
-    @RequestMapping(value = "/",method = RequestMethod.GET)
-    public String lo(HttpServletResponse response, HttpServletRequest request){
-        return "login";//登录失败  重定向登录页面
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public String registerGet(){
+        return "register";
     }
+
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public String register(@ModelAttribute(value = "user") User user,
+                         Model model,
+                         HttpServletResponse response,
+                         HttpServletRequest request) {
+        //注册用户
+        String result = userService.registerUser(user);
+        //将结果放入model中，在模板可以取道model的值
+        model.addAttribute("result",result);
+        return response.encodeRedirectURL("/index");
+    }
+
+
+    //方法用户跳转登录页面
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String loginGet() {
+        return "login";
+    }
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login(Model model,
+                        @ModelAttribute(value = "user") User user,
+                        HttpServletResponse response,
+                        HttpSession session
+                        ){
+        String user_login = userService.dealLogin(user);
+        //登录成功，将用户存入cookie和session
+        if (user_login.equals("登录成功")){
+            String user_uuid = UUID.randomUUID().toString().replace("-", "");
+            Cookie cookie = new Cookie(user_uuid, user.getUser_id());
+            //cookie有效期三天
+            cookie.setMaxAge(60*60*24*3);
+            //发送到客户端
+            response.addCookie(cookie);
+            //保存用户到session
+            session.setAttribute("user",user);
+            return response.encodeRedirectURL("/index");
+        }
+        //密码错误重写登录 并提示
+        model.addAttribute("user_login",user_login);
+        return response.encodeRedirectURL("/login");
+    }
+
 
 
 }

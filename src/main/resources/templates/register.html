@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8" />
 <meta name="author" content="order by dede58.com"/>
-<title>DeathGhost-登录</title>
+<title>DeathGhost-注册</title>
 <meta name="keywords" content="DeathGhost,DeathGhost.cn,web前端设,移动WebApp开发" />
 <meta name="description" content="DeathGhost.cn::H5 WEB前端设计开发!" />
 <meta name="author" content="DeathGhost"/>
 <link href="../static/style/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../static/js/public.js"></script>
 <script type="text/javascript" src="../static/js/jquery.js"></script>
-<script type="text/javascript" src="../static//jqpublic.js"></script>
+<script type="text/javascript" src="../static/js/jqpublic.js"></script>
 <!--
 Author: DeathGhost
 Author URI: http://www.deathghost.cn
@@ -30,12 +30,12 @@ Author URI: http://www.deathghost.cn
  </section>
  <div class="Logo_search">
   <div class="Logo">
-   <img src="images/logo.jpg" title="DeathGhost" alt="模板">
+   <img src="../static/images/logo.jpg" title="DeathGhost" alt="模板">
    <i></i>
    <span>西安市 [ <a href="#">莲湖区</a> ]</span>
   </div>
   <div class="Search"> 
-   <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
+   <form th:action="@{register}" method="post" id="main_a_serach" onsubmit="return check_search(this)">
    <div class="Search_nav" id="selectsearch">
     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
     <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
@@ -50,25 +50,40 @@ Author URI: http://www.deathghost.cn
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="javascript:location.reload();">首页</a></li>
-   <li><a href="list">商户</a></li>
-   <li><a href="category">美食</a></li>
-   <!--<li><a href="category.html">积分商城</a></li>-->
-   <!--<li><a href="article_read.html">关于我们</a></li>-->
+   <li><a href="index.html">首页</a></li>
+   <li><a href="list.html">订餐</a></li>
+   <li><a href="category.html">积分商城</a></li>
+   <li><a href="article_read.html">关于我们</a></li>
   </ul>
  </nav>
 </header>
 <!--Start content-->
 <section class="Psection MT20">
- <form th:action="@{login}"  method="post">
-  <table class="login">
+ <form th:action="@{register}"  method="post">
+  <table class="Register">
   <tr>
-  <td width="40%" align="right" class="FontW">账号：</td>
-  <td><input type="text" name="user_id" required autofocus placeholder="账号/电子邮件/手机号码"></td>
+  <td width="40%" align="right" class="FontW">用户名：</td>
+  <td><input type="text" name="user_id" required autofocus></td>
+  </tr>
+  <tr>
+  <td width="40%" align="right" class="FontW">昵称：</td>
+  <td><input type="text" name="user_name" required autofocus></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">密码：</td>
   <td><input type="password" name="user_password" required></td>
+  </tr>
+  <tr>
+  <td width="40%" align="right" class="FontW">再次确认：</td>
+  <td><input type="password" name="" required></td>
+  </tr>
+  <tr>
+  <td width="40%" align="right" class="FontW">手机号码：</td>
+  <td><input type="text" name="user_phone" required pattern="[0-9]{11}"></td>
+  </tr>
+  <tr>
+  <td width="40%" align="right" class="FontW">收货地址：</td>
+  <td><input type="text" name="user_host"></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">验证码：</td>
@@ -76,7 +91,7 @@ Author URI: http://www.deathghost.cn
   </tr>
   <tr>
   <td width="40%" align="right"></td>
-  <td><input type="submit" name="" value="登 录" class="Submit_b">( 已经是***会员，<a href="#" class="BlueA">请登录</a> )</td>
+  <td><input type="submit" name="" class="Submit_b" value="注 册">( 已经是会员，<a href="login.html" class="BlueA">请登录</a> )</td>
   </tr>
   </table>
  </form>
@@ -84,7 +99,8 @@ Author URI: http://www.deathghost.cn
 <!--End content-->
 <div class="F-link">
   <span>友情链接：</span>
-</div>
+
+ </div>
 <footer>
  <section class="Otherlink">
   <aside>
@@ -131,7 +147,7 @@ Author URI: http://www.deathghost.cn
     </div>
   </section>
  </section>
- <div class="copyright">© 版权所有 2020</div>
+<div class="copyright">© 版权所有 2020
 </footer>
 </body>
 </html>

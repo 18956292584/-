@@ -13,4 +13,51 @@
          user_phone
         from user where user_id = #{id}
     </select>
+
+    <insert id="insertUser">
+        INSERT
+        INTO
+        `user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user_id!=null">
+                user_id,
+            </if>
+            <if test="user_password!=null">
+                user_password,
+            </if>
+            <if test="user_name!=null">
+                user_name,
+            </if>
+            <if test="user_email!=null">
+                user_email,
+            </if>
+            <if test="user_host!=null">
+                user_host,
+            </if>
+            <if test="user_phone">
+                user_phone
+            </if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="user_id!=null">
+                #{user_id},
+            </if>
+            <if test="user_password!=null">
+                #{user_password},
+            </if>
+            <if test="user_name!=null">
+                #{user_name},
+            </if>
+            <if test="user_email!=null">
+                #{user_email},
+            </if>
+            <if test="user_host!=null">
+                #{user_host},
+            </if>
+            <if test="user_phone!=null">
+                #{user_phone},
+            </if>
+        </trim>
+    </insert>
 </mapper>
