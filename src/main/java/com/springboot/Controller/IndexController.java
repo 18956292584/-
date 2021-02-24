@@ -69,6 +69,7 @@ public class IndexController {
         return modelAndView;
     }
 
+    //没事
     //访问地址： localhost:9090/index/detailsp?foodid=1
     @RequestMapping("/detailsp")
     public ModelAndView detailsp(int foodid){
@@ -133,7 +134,7 @@ public class IndexController {
     @RequestMapping("/confirm_order")
     public ModelAndView confirm_order(int userId,String gwcId){
         ModelAndView modelAndView = new ModelAndView("confirmOrder");
-        OrderModel orderModel = userService.dealConfirmOrder(userId,gwcId);
+        OrderModel orderModel = orderService.dealConfirmOrder(userId,gwcId);
         modelAndView.addObject("orderModel",orderModel);
         modelAndView.addObject("address",userService.getAddress(userId));
 
@@ -145,7 +146,7 @@ public class IndexController {
     @RequestMapping("/submitOrder")
     @ResponseBody
     public String submit(Order order){
-        String res = userService.submitOrder(order);
+        String res = orderService.submitOrder(order);
         return res;
     }
 

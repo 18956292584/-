@@ -96,43 +96,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public OrderModel dealConfirmOrder(int userId, String gwcId) {
-        String[] str = gwcId.split("AND");
-        OrderModel model = new OrderModel();
-        double num = 0;
-        for (String st : str){
-            Gwc g = gwc.findByUserId(Integer.valueOf(st),userId);
-            num += g.getFood_count()*g.getFood_price();
-            model.getOrder_food().add(g);
-        }
-        int order_bus = gwc.getBusIdByGwcId(Integer.valueOf(str[0]));
-        model.setOrder_price(num);
-        model.setOrder_user(userId);
-        model.setOrder_bus(order_bus);
-
-        return model;
-    }
-
-    @Override
     public List<Address> getAddress(int userId) {
         return address.getAddress(userId);
     }
-
-    @Override
-    public String submitOrder(Order order) {
-        Date date = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        order.setOrder_date(ft.format(date));
-        Integer orderId = UUID.randomUUID().toString().hashCode();
-        orderId = orderId < 0 ? -orderId : orderId;
-        String uuid = String.valueOf(orderId);
-        order.setOrder_id(uuid);
-        orderMapper.addOrder(order);
-        gwc.updateState(order.getOrder_user(),order.getOrder_bus());
-
-        return uuid;
-    }
-
-
 
 }

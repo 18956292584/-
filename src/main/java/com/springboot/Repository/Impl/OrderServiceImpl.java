@@ -12,13 +12,18 @@ import com.springboot.mapper.OrderMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderMapper orderMapper;
+
     @Autowired
     GwcMapper gwcMapper;
     @Autowired
@@ -46,5 +51,38 @@ public class OrderServiceImpl implements OrderService {
         model.setOrder(order);
 
         return model;
+    }
+
+    @Override
+    public OrderModel dealConfirmOrder(int userId, String gwcId) {
+        String[] str = gwcId.split("AND");
+        OrderModel model = new OrderModel();
+        double num = 0;
+        for (String st : str){
+            Gwc g = gwcMapper.findByUserId(Integer.valueOf(st),userId);
+            num += g.getFood_count()*g.getFood_price();
+            model.getOrder_food().add(g);
+        }
+        int order_bus = gwcMapper.getBusIdByGwcId(Integer.valueOf(str[0]));
+        model.setOrder_price(num);
+        model.setOrder_user(userId);
+        model.setOrder_bus(order_bus);
+
+        return model;
+    }
+
+    @Override
+    public String submitOrder(Order order) {
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        order.setOrder_date(ft.format(date));
+        Integer orderId = UUID.randomUUID().toString().hashCode();
+        orderId = orderId < 0 ? -orderId : orderId;
+        String uuid = String.valueOf(orderId);
+        order.setOrder_id(uuid);
+        orderMapper.addOrder(order);
+        gwcMapper.updateState(order.getOrder_user(),order.getOrder_bus());
+
+        return uuid;
     }
 }

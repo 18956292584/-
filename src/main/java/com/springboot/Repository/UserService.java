@@ -20,12 +20,6 @@ public interface UserService {
 
     void addGwc(Gwc gwc);
 
-    OrderModel dealConfirmOrder(int userId, String gwcId);
-
     List<Address> getAddress(int userId);
-
-    String submitOrder(Order order);
-
-
 
 }
