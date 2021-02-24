@@ -1,6 +1,5 @@
 package com.springboot.Repository.Impl;
 
-import com.alipay.api.AlipayApiException;
 import com.springboot.Repository.UserService;
 import com.springboot.entity.*;
 import com.springboot.mapper.AddressMapper;
@@ -21,7 +20,7 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
-    UserMapper user;
+    UserMapper userMapper;
 
     //购物车接口
     @Autowired
@@ -34,20 +33,42 @@ public class UserServiceImpl implements UserService {
     //订单接口
     @Autowired
     OrderMapper orderMapper;
+
+
     /**
-     * 根据用户账号查询用户信息
-     * 得到用户信息 比对 输入的密码是否与用户信息密码一致
-     * @param id
-     * @param password
+     * 用户注册逻辑
+     * @param user
      * @return
      */
     @Override
-    public User dealLogin(String id,String password) {
-        User user = this.user.getUser(id);
-        if (null != user && user.getUser_password().equals(password)) {
-            return user;
+    public String registerUser(User user) {
+        //判断账号是否存在
+        if (userMapper.getUser(user.getUser_id())==null){
+            return userMapper.insertUser(user) > 0 ? "注册成功" : "注册失败";
         }
-        return null;
+        return "该账号已被使用";
+    }
+
+
+    /**
+     * 用户登录逻辑
+     * @param user
+     * @return
+     */
+    @Override
+    public String dealLogin(User user) {
+        //通过用户账号获取用户
+        User user_login = userMapper.getUser(user.getUser_id());
+        //获取失败
+        if (user_login==null) {
+            return "该账号不存在";
+        }
+        //密码错误
+        if (!user_login.getUser_password().equals(user.getUser_password())){
+            return "密码错误";
+        }
+        //若账号存在密码相同，登录成功
+        return "登录成功";
     }
 
     //更改购物车食物数量
@@ -111,5 +132,7 @@ public class UserServiceImpl implements UserService {
 
         return uuid;
     }
+
+
 
 }

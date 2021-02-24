@@ -6,8 +6,11 @@ import com.springboot.entity.*;
 import java.util.List;
 
 public interface UserService {
-    //获取用户id和密码
-    public User dealLogin(String id, String password);
+    //用户登录
+    String dealLogin(User user);
+
+    //用户注册
+    String registerUser(User user);
 
     //更改购物车食物数量
     void updateNum(int custId, int foodId, int num);
@@ -22,4 +25,7 @@ public interface UserService {
     List<Address> getAddress(int userId);
 
     String submitOrder(Order order);
+
+
+
 }
