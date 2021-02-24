@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
 <meta charset="utf-8" />
@@ -60,7 +61,7 @@ Author URI: http://www.deathghost.cn
 </header>
 <!--Start content-->
 <section class="Psection MT20">
- <form th:action="@{login}"  method="post">
+ <form action="loginGet"  method="post">
   <table class="login">
   <tr>
   <td width="40%" align="right" class="FontW">账号：</td>
@@ -76,62 +77,68 @@ Author URI: http://www.deathghost.cn
   </tr>
   <tr>
   <td width="40%" align="right"></td>
-  <td><input type="submit" name="" value="登 录" class="Submit_b">( 已经是***会员，<a href="#" class="BlueA">请登录</a> )</td>
+  <td><input type="submit" name="" value="登 录" class="Submit_b"><a href="#" class="BlueA" th:text="${res}"></a></td>
   </tr>
   </table>
  </form>
 </section>
 <!--End content-->
+
+<script th:inline="javascript">
+ if([[${res}]] != null){
+  alert([[${res}]]);
+ }
+</script>
 <div class="F-link">
   <span>友情链接：</span>
 </div>
-<footer>
- <section class="Otherlink">
-  <aside>
-   <div class="ewm-left">
-    <p>手机扫描二维码：</p>
-    <img src="../static/images/Android_ico_d.gif">
-    <img src="../static/images/iphone_ico_d.gif">
-   </div>
-   <div class="tips">
-    <p>客服热线</p>
-    <p><i>1830927**73</i></p>
-    <p>配送时间</p>
-    <p><time>09：00</time>~<time>22:00</time></p>
-    <p>网站公告</p>
-   </div>
-  </aside>
-  <section>
-    <div>
-    <span><i class="i1"></i>配送支付</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i2"></i>关于我们</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i3"></i>帮助中心</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
-    </ul>
-    </div>
-  </section>
- </section>
- <div class="copyright">© 版权所有 2020</div>
-</footer>
+<!--<footer>-->
+ <!--<section class="Otherlink">-->
+  <!--<aside>-->
+   <!--<div class="ewm-left">-->
+    <!--<p>手机扫描二维码：</p>-->
+    <!--<img src="../static/images/Android_ico_d.gif">-->
+    <!--<img src="../static/images/iphone_ico_d.gif">-->
+   <!--</div>-->
+   <!--<div class="tips">-->
+    <!--<p>客服热线</p>-->
+    <!--<p><i>1830927**73</i></p>-->
+    <!--<p>配送时间</p>-->
+    <!--<p><time>09：00</time>~<time>22:00</time></p>-->
+    <!--<p>网站公告</p>-->
+   <!--</div>-->
+  <!--</aside>-->
+  <!--<section>-->
+    <!--<div>-->
+    <!--<span><i class="i1"></i>配送支付</span>-->
+    <!--<ul>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<span><i class="i2"></i>关于我们</span>-->
+    <!--<ul>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<span><i class="i3"></i>帮助中心</span>-->
+    <!--<ul>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>-->
+     <!--<li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+  <!--</section>-->
+ <!--</section>-->
+ <!--<div class="copyright">© 版权所有 2020</div>-->
+<!--</footer>-->
 </body>
 </html>

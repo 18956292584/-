@@ -10,6 +10,7 @@ import com.springboot.entity.Order;
 import com.springboot.entity.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -30,8 +31,9 @@ public class IndexController {
 
     //访问地址： localhost:9090/index/
     @RequestMapping("/")
-    public ModelAndView index(){
+    public ModelAndView index(Model model1){
 
+        System.out.println(model1.containsAttribute("result"));
         ModelAndView model = new ModelAndView("index");
         //所有食物
         model.addObject("allfood",indexService.allFood());
