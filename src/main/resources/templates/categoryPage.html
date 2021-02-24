@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<tr th:each="food : ${allfood}">
+    <li>
+        <a th:href="'detailsp?foodid=' + @{${food.f_id}}" target="_blank" title="酸辣土豆丝">
+            <img th:src="@{'../static/upload/' + ${food.f_pic}}">
+            <p class="Overflow" th:text="'菜名：' + ${food.f_name}">菜名：酸辣土豆丝</p>
+            <p class="Overflow">价格：<span class="CorRed Font16" th:text="'￥ ' + ${food.f_price}">2</span><i></i></p>
+            <p class="Overflow" th:text="'店铺：'+${food.b_name}">店铺：好味来快餐连锁店</p>
+            <p class="Overflow" th:text="'月售量：'+${food.f_sales_volume} + '份'">月售量：997份</p>
+        </a>
+    </li>
+</tr>

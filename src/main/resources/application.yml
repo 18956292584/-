@@ -13,6 +13,11 @@ mvc:
 
   #spring配置
 spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
   application:
     name: cloud-payment-service
 

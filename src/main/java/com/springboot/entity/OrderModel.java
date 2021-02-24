@@ -6,7 +6,7 @@ import java.util.List;
 public class OrderModel {
     int order_bus;
     String order_busName;
-    int order_user;
+    String order_user;
     String order_userName;
     Address address;
     Business business;
@@ -66,11 +66,11 @@ public class OrderModel {
         this.order_bus = order_bus;
     }
 
-    public int getOrder_user() {
+    public String getOrder_user() {
         return order_user;
     }
 
-    public void setOrder_user(int order_user) {
+    public void setOrder_user(String order_user) {
         this.order_user = order_user;
     }
 

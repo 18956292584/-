@@ -8,6 +8,7 @@ import com.springboot.Repository.UserService;
 import com.springboot.entity.Gwc;
 import com.springboot.entity.Order;
 import com.springboot.entity.OrderModel;
+import com.springboot.entity.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,14 +50,27 @@ public class IndexController {
     //美食页面
     //访问地址： localhost:9090/index/category
     @RequestMapping("/category")
-    public ModelAndView category(){
+    public ModelAndView category(Page page){
         ModelAndView modelAndView = new ModelAndView("category");
         //购物车所有商品
-        modelAndView.addObject("allfood",indexService.allFood());
+        modelAndView.addObject("allfood",indexService.allFood(page));
         modelAndView.addObject("othershop",indexService.otherShop());
+        modelAndView.addObject("page",indexService.setPage(page));
+
         return modelAndView;
     }
 
+    //美食页面
+    //访问地址： localhost:9090/index/category
+    @RequestMapping("/currentPage")
+    public ModelAndView currentPage(Page page){
+        ModelAndView modelAndView = new ModelAndView("categoryPage");
+        //购物车所有商品
+        modelAndView.addObject("allfood",indexService.allFood(page));
+        modelAndView.addObject("page",indexService.setPage(page));
+
+        return modelAndView;
+    }
 
     //商家页面
     //访问地址： localhost:9090/index/shop?shopid=1
@@ -76,7 +90,6 @@ public class IndexController {
     @RequestMapping("/detailsp")
     public ModelAndView detailsp(int foodid){
         ModelAndView modelAndView = new ModelAndView("detailsp");
-        System.out.println(indexService.getFood(foodid).getB_name() + "------------------------");
         modelAndView.addObject("food",indexService.getFood(foodid));
         modelAndView.addObject("top3food",indexService.top3food());
         modelAndView.addObject("foodEvaluate",indexService.evaluateByshop(foodid));
@@ -127,14 +140,15 @@ public class IndexController {
     //添加新物品至购物车
     @RequestMapping("/addGwc")
     public void addGwc(Gwc gwc, HttpServletResponse response,
-                               HttpServletRequest request) throws IOException {
+                       HttpServletRequest request) throws IOException {
         userService.addGwc(gwc);
         response.sendRedirect("cart?userId=" + gwc.getCust_id());
     }
 
+    //确认订单
     //访问地址： localhost:9090/index/cart?userId=123
     @RequestMapping("/confirm_order")
-    public ModelAndView confirm_order(int userId,String gwcId){
+    public ModelAndView confirm_order(String userId,String gwcId){
         ModelAndView modelAndView = new ModelAndView("confirmOrder");
         OrderModel orderModel = orderService.dealConfirmOrder(userId,gwcId);
         modelAndView.addObject("orderModel",orderModel);
@@ -144,6 +158,7 @@ public class IndexController {
     }
 
 
+    //提交订单
     //访问地址： localhost:9090/index/cart?userId=123
     @RequestMapping("/submitOrder")
     @ResponseBody
@@ -152,6 +167,7 @@ public class IndexController {
         return res;
     }
 
+    //订单支付
     //访问地址： localhost:9090/index/cart?userId=123
     @RequestMapping("/respond")
     public ModelAndView respond(String orderid,double order_price){
@@ -166,6 +182,7 @@ public class IndexController {
         return modelAndView;
     }
 
+    //用户订单中心
     //访问地址： localhost:9090/index/user_center?userId=123
     @RequestMapping("/user_center")
     public ModelAndView request(int userId){
@@ -178,9 +195,17 @@ public class IndexController {
         return modelAndView;
     }
 
+    //查询是否支付成功
+    @RequestMapping("/request")
+    public void request(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String res = orderService.ckeckOrder(request,response);
+        response.sendRedirect("user_center?userId=" + res);
+    }
+
+    //用户订单详细
     //访问地址： localhost:9090/index/user_center?userId=123
     @RequestMapping("/user_order")
-    public ModelAndView request(int order_id,int order_state){
+    public ModelAndView request(String order_id,int order_state){
         ModelAndView modelAndView = new ModelAndView("user_order");
         modelAndView.addObject("orderfoods",orderService.getorderModel(order_id));
         modelAndView.addObject("order_state",order_state);

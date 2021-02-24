@@ -1,10 +1,10 @@
 package com.springboot.mapper;
 
 import com.springboot.entity.Business;
-import com.springboot.entity.Evaluate;
 import com.springboot.entity.EvaluateModel;
 import com.springboot.entity.Food;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.ArrayList;
@@ -106,4 +106,21 @@ public interface MainMapper {
 
     @Select("select * from t_business order by b_monthly_sales LIMIT 0,10")
     ArrayList<Business> otherShop();
+
+    @Select("SELECT\n" +
+            "\tf.f_id,\n" +
+            "\tf.f_name,\n" +
+            "\tb.b_name,\n" +
+            "  f.f_b_id,\n" +
+            "\tf.f_sales_volume,\n" +
+            "\tf.f_price,\n" +
+            "  f_pic,\n" +
+            "\tf_introduce,\n" +
+            "  f_stock\n" +
+            "FROM\n" +
+            "\tt_business b,\n" +
+            "\tt_food f\n" +
+            "WHERE\n" +
+            "\tf.f_b_id = b.b_id ORDER BY ${paixu} DESC LIMIT #{start}, #{end}")
+    ArrayList<Food> allfoodByPage(@Param("paixu") String paixu,@Param("start") Integer start, @Param("end") Integer end);
 }

@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Address> getAddress(int userId) {
+    public List<Address> getAddress(String userId) {
         return address.getAddress(userId);
     }
 

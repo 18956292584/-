@@ -7,7 +7,6 @@ import com.springboot.mapper.MainMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,7 +21,7 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public ArrayList<Food> allFood() {
-        return main.allfood();
+       return main.allfoodByPage("f_id",0,9);
     }
 
     @Override
@@ -97,5 +96,17 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public ArrayList<Business> otherShop() {
         return main.otherShop();
+    }
+
+    @Override
+    public Page setPage(Page page) {
+        ArrayList<Food> list = main.allfood();
+        page.setTotalPages(list.size()/page.getPageSize() + 1);
+        return page;
+    }
+
+    @Override
+    public ArrayList<Food> allFood(Page page) {
+        return main.allfoodByPage(page.getPaixu(),(page.getCurrentPage() - 1) * page.getPageSize(),page.getPageSize());
     }
 }

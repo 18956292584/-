@@ -20,6 +20,6 @@ public interface UserService {
 
     void addGwc(Gwc gwc);
 
-    List<Address> getAddress(int userId);
+    List<Address> getAddress(String userId);
 
 }

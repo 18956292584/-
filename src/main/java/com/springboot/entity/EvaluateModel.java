@@ -2,8 +2,6 @@ package com.springboot.entity;
 
 import lombok.Data;
 
-import java.sql.Date;
-
 @Data
 public class EvaluateModel {
     //用户名称

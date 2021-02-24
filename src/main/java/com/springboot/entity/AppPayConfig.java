@@ -11,8 +11,8 @@ public class AppPayConfig {
     public static String gatewayUrl = "https://openapi.alipaydev.com/gateway.do" ;
 
 
-    public static String notify_url="http://470da1df.nat123.fun/index/";
-    public static String return_url="http://470da1df.nat123.fun/index/";
+    public static String notify_url="http://xiyoutackout.test.utools.club/index/request";
+    public static String return_url="http://xiyoutackout.test.utools.club/index/request";
 
     public static String sign_type = "RSA";
 

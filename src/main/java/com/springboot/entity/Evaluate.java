@@ -2,8 +2,6 @@ package com.springboot.entity;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
 public class Evaluate {
     //评价id

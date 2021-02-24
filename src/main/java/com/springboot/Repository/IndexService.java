@@ -37,4 +37,7 @@ public interface IndexService {
 
     public ArrayList<Business> otherShop();
 
+    Page setPage(Page page);
+
+    ArrayList<Food> allFood(Page page);
 }

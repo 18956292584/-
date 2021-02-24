@@ -6,7 +6,7 @@ public class Order {
     String order_message;
     double order_price;
     int order_bus;
-    int order_user;
+    String order_user;
     String order_date;
     boolean order_isOk;
     int order_state;
@@ -59,11 +59,11 @@ public class Order {
         this.order_bus = order_bus;
     }
 
-    public int getOrder_user() {
+    public String getOrder_user() {
         return order_user;
     }
 
-    public void setOrder_user(int order_user) {
+    public void setOrder_user(String order_user) {
         this.order_user = order_user;
     }
 

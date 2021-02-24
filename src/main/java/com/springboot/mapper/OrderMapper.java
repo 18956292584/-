@@ -1,11 +1,7 @@
 package com.springboot.mapper;
 
-import com.springboot.entity.Gwc;
 import com.springboot.entity.Order;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -18,8 +14,11 @@ public interface OrderMapper {
    void addOrder(@Param("order")Order order);
 
     @Select("select * from t_order where order_state = #{state} and order_user = #{userId}")
-    List<Order> getOrder(@Param("userId")int userId, @Param("state")int state);
+    List<Order> getOrder(@Param("userId") int userId, @Param("state") int state);
 
     @Select("select * from t_order where order_id = #{order_id}")
-    Order getOrderinfo(int order_id);
+    Order getOrderinfo(String order_id);
+
+    @Update("update t_order set order_state = ${i} where order_id = #{outTradeNo}")
+    void setOrderState(@Param("outTradeNo") String outTradeNo, @Param("i") int i);
 }

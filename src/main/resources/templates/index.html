@@ -35,9 +35,9 @@ Author URI: http://www.deathghost.cn
  </section>
  <div class="Logo_search">
   <div class="Logo">
-   <img src="images/logo.jpg" title="DeathGhost" alt="模板">
+   <img src="../static/images/logo.jpg" title="校园外卖">
    <i></i>
-   <span>学校：西安邮电大学</span>
+   <span>[ 西安邮电大学 ]</span>
   </div>
   <div class="Search"> 
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
@@ -57,7 +57,7 @@ Author URI: http://www.deathghost.cn
   <ul class="menu">
       <li><a href="javascript:location.reload();">首页</a></li>
       <li><a href="list">商户</a></li>
-      <li><a href="category">美食</a></li>
+      <li><a href="category?currentPage=1&paixu=f_price">美食</a></li>
    <!--<li><a href="category.html">积分商城</a></li>-->
    <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
@@ -76,7 +76,7 @@ Author URI: http://www.deathghost.cn
  <div class="F-middle">
  <ul class="rslides f426x240">
        <tr th:each="food : ${top3food}">
-        <li><a href="javascript:"><img th:src="@{'../static/upload/' + ${food.f_pic}}"/></a></li>
+        <li><a th:href="'detailsp?foodid=' + ${food.f_id}"><img th:src="@{'../static/upload/' + ${food.f_pic}}"/></a></li>
        </tr>
     </ul>
  </div>
