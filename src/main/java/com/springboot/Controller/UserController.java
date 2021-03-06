@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,24 +61,29 @@ public class UserController {
     @RequestMapping(value = "/loginGet")
     public void loginGet(@ModelAttribute(value = "user") User user,
                               HttpServletResponse response,
+                              HttpServletRequest request,
                               HttpSession session
-                        ) throws IOException {
+                        ) throws IOException, ServletException {
 
+        //System.out.println(user);
         String user_login = userService.dealLogin(user);
         //登录成功，将用户存入cookie和session
         if (user_login.equals("登录成功")){
             String user_uuid = UUID.randomUUID().toString().replace("-", "");
-            Cookie cookie = new Cookie(user_uuid, user.getUser_id());
+
+            Cookie cookie = new Cookie("user_id", user.getUser_id());
             //cookie有效期三天
             cookie.setMaxAge(60*60*3);
+            cookie.setPath("/");
             //发送到客户端
             response.addCookie(cookie);
             //保存用户到session
-            session.setAttribute("user",user);
+
+            session.setAttribute(user.getUser_id(),user);
             session.setMaxInactiveInterval(60*60*3);
-            response.sendRedirect("../index/");
+            request.getRequestDispatcher("../index/").forward(request, response);
         } else {
-            response.sendRedirect("login?res=" +  URLEncoder.encode(user_login,"utf-8"));
+            request.getRequestDispatcher("login?res=" +  URLEncoder.encode(user_login,"utf-8")).forward(request, response);;
         }
     }
 

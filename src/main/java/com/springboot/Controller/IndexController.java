@@ -33,7 +33,7 @@ public class IndexController {
     //访问地址： localhost:9090/index/
     @RequestMapping("/")
     public ModelAndView index(Model model1){
-
+        System.out.println(123);
         System.out.println(model1.containsAttribute("result"));
         ModelAndView model = new ModelAndView("index");
         //所有食物

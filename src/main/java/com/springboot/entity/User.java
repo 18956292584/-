@@ -61,4 +61,16 @@ public class User implements Serializable {
     public void setUser_phone(String user_phone) {
         this.user_phone = user_phone;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id='" + user_id + '\'' +
+                ", user_password='" + user_password + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", user_email='" + user_email + '\'' +
+                ", user_host='" + user_host + '\'' +
+                ", user_phone='" + user_phone + '\'' +
+                '}';
+    }
 }

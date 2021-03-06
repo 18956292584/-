@@ -76,7 +76,7 @@ Author URI: http://www.deathghost.cn
  <div class="F-middle">
  <ul class="rslides f426x240">
        <tr th:each="food : ${top3food}">
-        <li><a th:href="'detailsp?foodid=' + ${food.f_id}"><img th:src="@{'../static/upload/' + ${food.f_pic}}"/></a></li>
+        <li><a th:href="'/index/detailsp?foodid=' + ${food.f_id}"><img th:src="@{'../static/upload/' + ${food.f_pic}}"/></a></li>
        </tr>
     </ul>
  </div>
@@ -158,7 +158,7 @@ Author URI: http://www.deathghost.cn
       <tr th:each="food : ${allfood}">
        <!--<td th:text="${user.name}">tyrone</td>-->
        <!--<td th:text="${user.age}">18</td>-->
-       <a th:href="'detailsp?foodid=' + @{${food.f_id}}" target="_blank" title="菜品名称">
+       <a th:href="'/index/detailsp?foodid=' + @{${food.f_id}}" target="_blank" title="菜品名称">
         <figure>
          <img th:src="@{'../static/upload/' + ${food.f_pic}}" >
          <figcaption>
@@ -285,6 +285,32 @@ Author URI: http://www.deathghost.cn
   </div>
  </aside>
 </section>
+<script language=javascript>
+ //添加cookie
+ function setCookie(name,value,time){
+  var date= new Date();
+  date.setDate(date.getDate()+time);
+  document.cookie = name+"="+value+";expires="+date;
+ }
+
+ //获得cookie
+ function getCookie(name){
+  var arr = document.cookie.split(";");
+  for(var i=0; i<arr.length; i++){
+   var arr2 = arr[i].split("=");
+   if(arr2[0] == name){
+    return arr2[1];
+   }
+  }
+  return null;
+ }
+
+ //删除cookie
+ function removeCookie(name){
+  setCookie(name,"",0)
+ }
+</script>
+
 <!--End content-->
 <div class="F-link">
   <span>友情链接：</span>
