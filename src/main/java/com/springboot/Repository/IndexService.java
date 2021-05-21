@@ -10,34 +10,44 @@ public interface IndexService {
     public ArrayList<Food> allFood();
 
     //获取所有商家
-    public ArrayList<Business> allbusiness();
+    ArrayList<Business> allbusiness();
 
     //获取所有食物
-    public ArrayList<Food> top3fod();
+    ArrayList<Food> top3fod();
 
     //获取商家
-    public Business getshop(int shopid);
+    Business getshop(int shopid);
 
     //获取商家食物
-    public ArrayList<Food> shopfood(int shopid);
+    ArrayList<Food> shopfood(int shopid);
 
     //获取其他商家
-    public ArrayList<Business> othershop(int shopid);
+    ArrayList<Business> othershop(int shopid);
 
     //获取前10条评价
-    public ArrayList<EvaluateModel> top10evaluate();
+    ArrayList<EvaluateModel> top10evaluate();
 
-    public ArrayList<EvaluateModel> evaluateByshop(int shopid);
+    ArrayList<EvaluateModel> evaluateByfood(int shopid);
 
-    public Food getFood(int foodid);
+    Food getFood(int foodid);
 
-    public ArrayList<Food> top3food();
+    ArrayList<Food> top3food();
 
-    public HashMap<String,ArrayList<Gwc>> getGwc(int userId);
+    HashMap<String,ArrayList<Gwc>> getGwc(String userId);
 
-    public ArrayList<Business> otherShop();
+    ArrayList<Business> otherShop();
 
-    Page setPage(Page page);
+    Page setAllfoodPage(Page page);
 
     ArrayList<Food> allFood(Page page);
+
+    ArrayList<Food> searchFood(String search_s);
+
+    ArrayList<Business> allbusiness(Page page);
+
+    Page setAllBusPage(Page page);
+
+    ArrayList<Business> searchBus(String keyword);
+
+    ArrayList<EvaluateModel> evaluateByshop(int shopid);
 }

@@ -5,7 +5,7 @@ public class Order {
     int order_address;
     String order_message;
     double order_price;
-    int order_bus;
+    String order_bus;
     String order_user;
     String order_date;
     boolean order_isOk;
@@ -51,11 +51,11 @@ public class Order {
         this.order_price = order_price;
     }
 
-    public int getOrder_bus() {
+    public String getOrder_bus() {
         return order_bus;
     }
 
-    public void setOrder_bus(int order_bus) {
+    public void setOrder_bus(String order_bus) {
         this.order_bus = order_bus;
     }
 

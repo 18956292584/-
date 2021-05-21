@@ -22,10 +22,10 @@ Author URI: http://www.deathghost.cn
  <section class="Topmenubg">
   <div class="Topnav">
    <div class="LeftNav">
-    <a href="register.html">注册</a>/<a href="login.html">登录</a>
+    <a href="/user/register">注册</a>/<a href="/user/login">登录</a>
    </div>
    <div class="RightNav">
-    <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a> <a href="cart.html">购物车</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="/user/user_center">用户中心</a> <a href="/user/user_center">我的订单</a> <a href="/user/cart">购物车</a><a href="/business/BusLoad">商家登录</a>
    </div>
   </div>
  </section>
@@ -35,37 +35,38 @@ Author URI: http://www.deathghost.cn
    <i></i>
    <span>[ 西安邮电大学 ]</span>
   </div>
-  <div class="Search"> 
+  <div class="Search">
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
-   <div class="Search_nav" id="selectsearch">
-    <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
-   </div>
-   <div class="Search_area"> 
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />
-   </div>
+    <div class="Search_nav" id="selectsearch">
+     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
+     <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
+    </div>
+    <div class="Search_area">
+     <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
+     <input type="submit" class="searchbutton" value="搜 索" />
+    </div>
    </form>
-   <!--<p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>-->
   </div>
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="../index/">首页</a></li>
-   <li><a href="list">订餐</a></li>
-   <li><a href="category?currentPage=1&paixu=f_price">美食</a></li>
+   <li><a href="/index/">首页</a></li>
+   <li><a href="/index/list?currentPage=1&paixu=b_score">商户</a></li>
+   <li><a href="/index/category?currentPage=1&paixu=f_price">美食</a></li>
+   <!--<li><a href="category.html">积分商城</a></li>-->
+   <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
 </header>
 <!--Start content-->
 <section class="Psection MT20">
 <nav class="U-nav Font14 FontW">
-  <ul>
-   <li><i></i><a href="user_center.html">我的订单</a></li>
-   <li><i></i><a href="user_address.html">收货地址</a></li>
-   <li><i></i><a href="user_account.html">账户管理</a></li>
-   <li><i></i><a href="#">安全退出</a></li>
-  </ul>
+ <ul>
+  <li><i></i><a href="/user/user_center">我的订单</a></li>
+  <li><i></i><a href="/user/user_address">收货地址</a></li>
+  <li><i></i><a href="/user/user_account">账户管理</a></li>
+  <li><i></i><a href="/user/Offline">安全退出</a></li>
+ </ul>
  </nav>
  <article class="U-article Overflow">
   <!--"引用“user_page/user_index.html”"-->
@@ -91,8 +92,8 @@ Author URI: http://www.deathghost.cn
       <td th:text="${dfk.order_date}">2014-09-22 19:21:38</td>
       <td th:text="${dfk.order_user}">DeathGhost</td>
       <td th:text="${dfk.order_price}">￥328.00</td>
-      <td><a th:href="'user_order?order_id=' + ${dfk.order_id} + '&order_state=' + ${dfk.order_state}">点击查看详细</a></td>
-      <td><a href="#">删除订单</a> | <a th:href="'respond?order_id=' + ${dfk.order_id} + '&order_price=' + ${dfk.order_price}">付款</a></td>
+      <td><a th:href="'/user/user_order?order_id=' + ${dfk.order_id} + '&order_state=' + ${dfk.order_state}">点击查看详细</a></td>
+      <td><a th:href="'/user/deleteOrder?order_id=' + ${dfk.order_id}">删除订单</a> | <a th:href="'respond?order_id=' + ${dfk.order_id} + '&order_price=' + ${dfk.order_price}" target="_blank">付款</a></td>
      </tr>
     </table>
     <table class="Myorder" id="daifahuo1" style="display: none;">
@@ -112,7 +113,7 @@ Author URI: http://www.deathghost.cn
       <td th:text="${dsh.order_user}">DeathGhost</td>
       <td th:text="${dsh.order_price}">￥328.00</td>
       <td><a th:href="'user_order?order_id=' + ${dsh.order_id} + '&order_state=' + ${dsh.order_state}">点击查看详细</a></td>
-      <td><a href="#">取消订单</a> | <a href="#">确认收货</a></td>
+      <td><a href="#">取消订单</a> | <a th:href="'confirmReceipt?order_id=' + ${dsh.order_id}">确认收货</a></td>
      </tr>
     </table>
     <table class="Myorder" id="daipingjia1" style="display: none;">
@@ -121,8 +122,8 @@ Author URI: http://www.deathghost.cn
       <td th:text="${dpj.order_date}">2014-09-22 19:21:38</td>
       <td th:text="${dpj.order_user}">DeathGhost</td>
       <td th:text="${dpj.order_price}">￥328.00</td>
-      <td><a th:href="'user_order?order_id=' + ${dpj.order_id}">点击查看详细</a></td>
-      <td><a href="#">评价</a></td>
+      <td><a th:href="'user_order?order_id=' + ${dpj.order_id} + '&order_state=' + ${dpj.order_state}">点击查看详细</a></td>
+      <td><a th:href="'user_pj?order_id=' + ${dpj.order_id} + '&order_state=' + ${dpj.order_state}">评价</a></td>
      </tr>
     </table>
     

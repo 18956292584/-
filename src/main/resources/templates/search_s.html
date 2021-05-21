@@ -60,31 +60,13 @@ Author URI: http://www.deathghost.cn
 </header>
 <!--Start content-->
 <section class="Psection">
-<section class="Fslmenu">
- <a href="/index/list?currentPage=1&paixu=b_id" title="默认排序">
-  <span>
-  <span>默认排序</span>
-  <span></span>
-  </span>
- </a>
- <a href="/index/list?currentPage=1&paixu=b_score" title="评价">
-  <span>
-  <span>评价</span>
-  <span class="s-up"></span>
-  </span>
- </a>
- <a href="/index/list?currentPage=1&paixu=b_monthly_sales" title="销量">
-  <span>
-  <span>销量</span>
-  <span class="s-up"></span>
-  </span>
- </a>
+
 </section>
 <section class="Fsl">
  <ul>
   <tr th:each="business : ${allbusiness}">
    <li>
-    <a th:href="@{'/index/shop?shopid='+${business.b_id}}" target="_blank" title="调用产品名/店铺名"><img th:src="@{'../static/upload/' + ${business.b_pic}}"></a>
+    <a th:href="@{'shop?shopid='+${business.b_id}}" target="_blank" title="调用产品名/店铺名"><img th:src="@{'../static/upload/' + ${business.b_pic}}"></a>
     <hgroup>
      <h3 th:text="${business.b_name}">【大明宫】***川菜馆</h3>
      <h4></h4>
@@ -100,7 +82,7 @@ Author URI: http://www.deathghost.cn
       </span>
     <span class="Score-v" th:text="${business.b_score}">4.8</span>
     </span>
-     <span class="DSBUTTON"><a th:href="@{'/index/shop?shopid='+${business.b_id}}" target="_blank" class="Fontfff">点外卖</a></span>
+     <span class="DSBUTTON"><a th:href="@{'shop?shopid='+${business.b_id}}" target="_blank" class="Fontfff">点外卖</a></span>
     </p>
    </li>
   </tr>
@@ -129,63 +111,41 @@ Author URI: http://www.deathghost.cn
  </ul>
  <aside>
   <div class="title">热门商家</div>
-  <tr th:each="shop : ${othershop}">
-   <div class="C-list">
-    <a th:href="'/index/shop?shopid=' + ${shop.b_id}" target="_blank" title="店铺名称"><img th:src="@{'/static/upload/' + ${shop.b_pic}}"></a>
-    <p><a th:href="'/index/shop?shopid=' + ${shop.b_id}" target="_blank" th:text="${shop.b_name}">[大雁塔]店铺名称</a></p>
-    <p>
-    <span th:text="'月售量：' + ${shop.b_monthly_sales}"></span>
-     <span style=" float:right">
-      <span th:each="i,stat:${#numbers.sequence(1, 5)}">
-        <img th:if="${stat.count< shop.b_score}" src="../static/images/star-on.png">
-        <img th:if="${stat.count >shop.b_score}" src="../static/images/star-off.png">
-      </span>
-     <span class="ALscore" th:text="${shop.b_score}">4.8</span>
-    </span>
-    </p>
-   </div>
-  </tr>
+  <div class="C-list">
+   <a href="shop.html" target="_blank" title="店铺名称"><img src="upload/cc.jpg"></a>
+   <p><a href="shop.html" target="_blank">[大雁塔]店铺名称</a></p>
+   <p>
+   <span>人均：20~50元</span>
+   <span style=" float:right">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="ALscore">4.8</span>
+   </span>
+   </p>
+  </div>
+  <div class="C-list">
+   <a href="shop.html" target="_blank" title="店铺名称"><img src="upload/cc.jpg"></a>
+   <p><a href="shop.html" target="_blank">[大雁塔]店铺名称</a></p>
+   <p>
+   <span>电话：*****</span>
+   <span style=" float:right">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-on.png">
+    <img src="images/star-off.png">
+    <span class="ALscore">4.8</span>
+   </span>
+   </p>
+  </div>
  </aside>
 </section>
 </section>
-<script th:inline="javascript">
- var paixu = [[${page.paixu}]];
- var totalPages = [[${page.totalPages}]];//总页数
- var pageno = 1;//当前页数
- $(function(){
-  $(window).scroll(function() {
-   var scrollTop = $(this).scrollTop(),scrollHeight = $(document).height(),windowHeight = $(this).height();
-   var positionValue = (scrollTop + windowHeight) - scrollHeight;
-   if (positionValue > -1) {
-    if (pageno < totalPages) {
-     pageno++;
-     doSomething(pageno);
-    } else {
-     alert('没有更多了');
-    }
-   }
-  })
- });
-
- function doSomething(pageno) {
-  $.ajax({
-   type : "post",
-   url : "listPage",
-   dataType: 'html',
-   data : {currentPage:pageno,paixu:paixu},
-   success : function (data) {
-    $("#foodlist").append(data);
-   },
-   error : function() {
-    alert("异常！");
-   }
-  });
-
- }
-</script>
 <!--End content-->
 <footer>
- <div class="copyright">© 版权所有 西安邮电大学
 </footer>
 </body>
 </html>

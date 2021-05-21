@@ -13,21 +13,21 @@ public interface GwcMapper {
     void add(@Param("gwc") Gwc gwc);
 
     @Update("update t_gwc set food_count = #{food_count} where cust_id = #{cust_id} and food_id = #{food_id} and gwc_state != 0")
-    void updateNum(@Param("food_count") int food_count, @Param("cust_id") int cust_id, @Param("food_id") int food_id);
+    void updateNum(@Param("food_count") int food_count, @Param("cust_id") String cust_id, @Param("food_id") int food_id);
 
 //    public Gwc findById(int custId, int bookId);
 //
 //    public float getPrice(int custId);
 
     @Select("select * from t_gwc where cust_id = #{custId} and gwc_state != 0")
-    ArrayList<Gwc> getAllItems(int custId);
+    ArrayList<Gwc> getAllItems(String custId);
 
 
     @Update("DELETE from t_gwc where cust_id = = #{cust_id} and food_id = #{food_id}")
     void removeGwc(@Param("cust_id") int cust_id, @Param("food_id") int food_id);
 
     @Select("SELECT food_count FROM t_gwc WHERE food_id = #{food_id} and cust_id = #{cust_id} and gwc_state != 0")
-    ArrayList<Integer> findById(@Param("food_id") int food_id, @Param("cust_id") int cust_id);
+    ArrayList<Integer> findById(@Param("food_id") int food_id, @Param("cust_id") String cust_id);
 
     @Select("SELECT * FROM t_gwc WHERE gwc_id = #{gwc_id} and cust_id = #{cust_id} and gwc_state != 0")
     Gwc findByUserId(@Param("gwc_id") int gwc_id, @Param("cust_id") String cust_id);
@@ -36,8 +36,8 @@ public interface GwcMapper {
     Integer getBusIdByGwcId(int gwc_id);
 
     @Update("update t_gwc set gwc_state = 0 where cust_id = #{order_user} and bus_id = #{order_bus}")
-    void updateState(@Param("order_user") String order_user, @Param("order_bus") int order_bus);
+    void updateState(@Param("order_user") String order_user, @Param("order_bus") String order_bus);
 
     @Select("select * from t_gwc where cust_id = #{custId} and bus_id = #{bus_id}")
-    ArrayList<Gwc> getAllItemsByBusId(@Param("bus_id") int order_bus, @Param("custId") String cust_id);
+    ArrayList<Gwc> getAllItemsByBusId(@Param("bus_id") String order_bus, @Param("custId") String cust_id);
 }

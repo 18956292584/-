@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="西邮校园外卖"/>
+<title>DeathGhost-用户中心</title>
+<meta name="keywords" content="西邮校园外卖" />
+<meta name="description" content="西邮校园外卖" />
+<meta name="author" content="西邮校园外卖"/>
+<link href="../static/style/reset.css" rel="stylesheet" />
+<link href="../static/style/iconfont.css" rel="stylesheet" />
+<link href="../static/style/index.css" rel="stylesheet" />
+<link href="../static/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../static/js/public.js"></script>
+<script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript" src="../static/js/jqpublic.js"></script>
+<script src="../static/js/jquery-1.9.1.min.js"></script>
+<script src="../static/js/f.js"></script>
+<!--
+Author: DeathGhost
+Author URI: http://www.deathghost.cn
+-->
+</head>
+<body>
+<header>
+	<div class="PublicHead clearfix">
+        <div class="leftBox clearfix">
+            <div class="companyLogo">
+                <img src="../static/images/logo.jpg" style="width: 100px;height: 48px;"/>
+           </div>
+           <div class="companyText">
+                西邮外卖商家后台系统
+           </div>
+        </div>
+        <div class="RightBox clearfix">
+            <div class="UserPhotoBox">
+                <div class="UserPic">
+                    <img th:src="'../static/upload/'+ ${bus.getB_pic()}" />
+                </div>
+                <div class="UserName">
+                    管理员
+                </div>
+            </div>
+            <a href="/business/Offline">
+                <div class="dropOutBox">
+                    <i class="iconfont icon-app_icons--">
+                    </i>
+                    <span>退出</span>
+                </div>
+            </a>
+        </div>
+    </div>
+ <section class="Topmenubg">
+  
+ </section>
+</header>
+<!--Start content-->
+<section class="Psection MT20">
+	<nav class="U-nav Font14 FontW">
+    <ul>
+        <li><i></i><a href="/business/Bus_center">订单列表</a></li>
+        <li><i></i><a href="/business/ProductManagement?state=1">产品管理</a></li>
+        <li><i></i><a href="/business/bus_Account">账户管理</a></li>
+    </ul>
+	</nav>
+    <article class="U-article Overflow">
+        <span class="Font14 FontW Lineheight35 Block" th:text="'客户名称：' + ${orderfoods.address.a_name}">老重庆川菜馆 </span>
+        <span class="Font14 FontW Lineheight35 Block" th:text="'客户电话：' + ${orderfoods.address.a_phone}">商家电话：18956292584 </span>
+        <span class="Font14 FontW Lineheight35 Block" th:text="'订单编号：' + ${orderfoods.order.order_id}">订单编号：201409243195 </span>
+        <table class="U-order-D">
+            <th>订单产品</th>
+            <th>订购数量</th>
+            <th>单价</th>
+            <th>共计金额</th>
+            <tr th:each="gwc:${orderfoods.order_food}">
+                <td><a href="detailsp.html" target="_blank" title="酸辣土豆丝" th:text="${gwc.food_name}">酸辣土豆丝</a></td>
+                <td th:text="${gwc.food_count}">1</td>
+                <td th:text="'￥' + ${gwc.food_price}">￥8.00</td>
+                <td th:text="'￥' + ${gwc.food_price} * ${gwc.food_count}">10.00</td>
+                <!--如果未付款，则显示立即付款按钮-->
+                <td style="display:none;"><a href="#" target="_blank">立即付款</a></td>
+            </tr>
+        </table>
+        <table class="U-order-A">
+            <form name="form" method="get" action="">
+                <tr>
+                    <td width="30%" align="right" class="FontW">收货地址：</td>
+                    <td><input type="text" name="a_address" class="input_addr" th:value="${orderfoods.address.a_address}" required></td>
+                </tr>
+                <tr style="display: none">
+                    <td width="30%" align="right" class="FontW">地址ID：</td>
+                    <td><input type="text" name="a_id" class="input_addr" th:value="${orderfoods.address.a_id}" required></td>
+                </tr>
+                <tr>
+                    <td width="30%" align="right" class="FontW" >收件人姓名：</td>
+                    <td><input type="text" name="a_name" class="input_name" required th:value="${orderfoods.address.a_name}"></td>
+                </tr>
+                <tr>
+                    <td width="30%" align="right" class="FontW">手机号码：</td>
+                    <td><input type="text" name="a_phone" class="input_tel" th:value="${orderfoods.address.a_phone}" required pattern="[0-9]{11}"></td>
+                </tr>
+                <tr>
+                    <td width="30%" align="right"></td>
+                    <!--未付款订单，可以修改地址！-->
+                    <td id="ytsubmit"><input type="button" name="" value="确认修改地址" class="Submit"  onClick="this.form.action='changeAddress3';this.form.submit();">（未付款订单，可以修改地址！）</td>
+                </tr>
+            </form>
+        </table>
+
+    </article>
+</section>
+<!--End content-->
+<!--<div class="F-link">
+  <span>友情链接：</span>
+ </div>-->
+<!--<footer>
+</footer>-->
+<script  th:inline="javascript">
+    if([[${order_state}]] != 0){
+        $("#ytsubmit").css('display','none');
+        $(".input_addr").attr("readonly","readonly");
+        $(".input_name").attr("readonly","readonly");
+        $(".input_tel").attr("readonly","readonly");
+        $(".input_mark").attr("readonly","readonly");
+    }
+</script>
+
+</body>
+</html>

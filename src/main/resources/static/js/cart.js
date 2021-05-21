@@ -108,7 +108,7 @@ function delcart(parameters,custid) {
 	$('#table' + parameters).remove();
 
 	$.ajax({
-		url: "/index/removeGwc",
+		url: "/user/removeGwc",
 		data: {foodid:parameters,custid:custid},
 		type: "POST",
 		dataType: "text",
@@ -172,7 +172,7 @@ function dealAdd(parameters,custid) {
 
 	var count = $('#text' + parameters).val();
 	$.ajax({
-		url: "/index/dealGwcAdd",
+		url: "/user/dealGwcAdd",
 		data: {custid: custid,foodid:parameters,count:count},
 		type: "POST",
 		dataType: "text",
@@ -191,7 +191,7 @@ function dealSub(parameters,custid) {
 
 	var count = $('#text' + parameters).val();
 	$.ajax({
-		url: "/index/dealGwcAdd",
+		url: "/user/dealGwcAdd",
 		data: {custid: custid,foodid:parameters,count:count},
 		type: "POST",
 		dataType: "text",
@@ -264,11 +264,29 @@ $(function(){
 			$(source).draggable('options').cursor='not-allowed';
 		},
 		onDrop:function(e,source){
-			var name = $(source).find('p:eq(0)').html();
-			var price = $(source).find('p:eq(1)').html();
+			var food_name = $(source).find('p:eq(0)').html();
+			var food_price = $(source).find('p:eq(1)').attr("price");
+			var food_price1 = $(source).find('p:eq(1)').html();
 			var food_id = $(source).find('p:eq(2)').html();
-			alert(food_id);
-			addProduct(name, parseFloat(price.split('￥')[1]));
+			var cust_id = $(source).find('p:eq(3)').html();
+			var bus_id = $(source).find('p:eq(4)').html();
+			var food_pic = $(source).find('p:eq(5)').html();
+			var bus_name = $(source).find('p:eq(6)').html();
+			var gwc_state = $(source).find('p:eq(7)').html();
+			$.ajax({
+				type : "post",
+				url : "/user/addGwc",
+				data : {food_name:food_name,food_price:food_price,food_id:food_id,cust_id:cust_id,
+					bus_id:bus_id,food_pic:food_pic,bus_name:bus_name,gwc_state:gwc_state,food_count:1},
+				async:false,
+				success : function () {
+					addProduct(food_name, parseFloat(food_price1.split('￥')[1]));
+				},
+				error : function() {
+					alert("异常！");
+				}
+			});
+
 		}
 	});
 });

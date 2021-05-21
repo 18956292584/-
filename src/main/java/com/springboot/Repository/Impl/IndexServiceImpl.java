@@ -55,8 +55,8 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public ArrayList<EvaluateModel> evaluateByshop(int shopid) {
-        return main.evaluateByshop(shopid);
+    public ArrayList<EvaluateModel> evaluateByfood(int foodid) {
+        return main.evaluateByfood(foodid);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public HashMap<String,ArrayList<Gwc>> getGwc(int userId) {
+    public HashMap<String,ArrayList<Gwc>> getGwc(String userId) {
         ArrayList<Gwc> list = gwc.getAllItems(userId);
 
         HashMap<String,ArrayList<Gwc>> map = new HashMap<String,ArrayList<Gwc>>();
@@ -99,7 +99,7 @@ public class IndexServiceImpl implements IndexService {
     }
 
     @Override
-    public Page setPage(Page page) {
+    public Page setAllfoodPage(Page page) {
         ArrayList<Food> list = main.allfood();
         page.setTotalPages(list.size()/page.getPageSize() + 1);
         return page;
@@ -108,5 +108,32 @@ public class IndexServiceImpl implements IndexService {
     @Override
     public ArrayList<Food> allFood(Page page) {
         return main.allfoodByPage(page.getPaixu(),(page.getCurrentPage() - 1) * page.getPageSize(),page.getPageSize());
+    }
+
+    @Override
+    public ArrayList<Food> searchFood(String search_s) {
+        return main.searchFood(search_s);
+    }
+
+    @Override
+    public ArrayList<Business> allbusiness(Page page) {
+        return main.allbusinessByPage(page.getPaixu(),(page.getCurrentPage() - 1) * page.getPageSize(),page.getPageSize());
+    }
+
+    @Override
+    public Page setAllBusPage(Page page) {
+        ArrayList<Business> list = main.allbusiness();
+        page.setTotalPages(list.size()/page.getPageSize() + 1);
+        return page;
+    }
+
+    @Override
+    public ArrayList<Business> searchBus(String keyword) {
+        return main.searchBus(keyword);
+    }
+
+    @Override
+    public ArrayList<EvaluateModel> evaluateByshop(int shopid) {
+        return main.evaluateByshop(shopid);
     }
 }

@@ -6,7 +6,16 @@ public class Address {
     String	a_address;
     String a_name;
     String	a_user;
+    String a_gwc;
     boolean	a_state;
+
+    public String getA_gwc() {
+        return a_gwc;
+    }
+
+    public void setA_gwc(String a_gwc) {
+        this.a_gwc = a_gwc;
+    }
 
     public int getA_id() {
         return a_id;

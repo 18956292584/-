@@ -61,7 +61,7 @@ code::selection {background:#dddddd;}
 .Logo_search .Logo i{height:45px;width:1px;background:#d6d6d6; display:inline-block;vertical-align:middle;}
 .Logo_search .Logo span{font-size:14px;vertical-align:middle;margin:0 10px;color:#999;}
 .Logo_search .Logo span a{color:#ccc;}
-.Logo_search .Logo img{width:308px;height:89px;margin:13px 0;vertical-align:middle;}
+.Logo_search .Logo img{margin:13px 0;vertical-align:middle;}
 .Logo_search .Search{width:50%;float:left;padding-top:15px;height:100px;overflow:hidden;}
 .Logo_search .Search .hotkeywords{height:30px;line-height:30px;margin-top:2px;}
 .Logo_search .Search .hotkeywords a{margin-right:10px;}
@@ -267,7 +267,7 @@ code::selection {background:#dddddd;}
 .shopcontent .title-list li.on{ color: #ff6600; font-weight: bold;}
 .shopcontent .title-list p{position:absolute;top:40px;left:0px;width:146px;height:7px;border-top: 3px solid #ff6600; overflow: hidden; text-align: center;}
 .shopcontent .title-list b{background:#000;}
-.menutab{ height:100%; position: relative; overflow: hidden; display: none; margin-top: 20px; float:left;}
+.menutab{ height:100%; position: relative; overflow: hidden; display: none; margin-top: 0px; float:left;}
 .menutab ul{left: 0px;}
 .menutab-wrap .show{ display: block;}
 .menutab-wrap .menutab li{ float: left; display: inline; margin:5px;background: #f1f1f1;border: 2px solid #fafafa; transition:0.4s;-webkit-transition:0.4s;-moz-transition: 0.4s;-o-transition: 0.4s;-ms-transition: 0.4s;}
@@ -399,7 +399,7 @@ code::selection {background:#dddddd;}
 .slp .food-hd .foodpic ul{width:496px;height:auto;margin:8px 0;}
 .slp .food-hd .foodpic li{width:78px;height:55px;float:left;margin:0 8px 0 0;}
 .slp .food-hd .foodpic li img{width:78px;height:55px;}
-.slp .food-hd .foodtext{width:558px;height:302px;float:left;margin:0 10px;font-size:13px;}
+.slp .food-hd .foodtext{width:532px;height:302px;float:left;margin:0 10px;font-size:13px;}
 .slp .food-hd .foodtext .foodname_a{padding:0;line-height:25px;border-bottom:1px #dddddd dotted;}
 .slp .food-hd .foodtext .foodname_a h1{font-size:18px;font-weight:bold;}
 .slp .food-hd .foodtext .foodname_a p{color:#aaaaaa;}
@@ -423,7 +423,7 @@ code::selection {background:#dddddd;}
 .slp .food-hd .foodtext .BuyNo .Buybutton .BuyB:hover{background-image: -moz-linear-gradient(top, #f55300, #fe8617); /* Firefox */background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f55300), color-stop(1, #fe8617)); /* Saf4+, Chrome */filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6ff00', endColorstr='#538300', GradientType='0'); /* IE*/}
 .slp .food-hd .foodtext .BuyNo .Buybutton .Backhome{height:43px;width:175px;line-height:43px;text-align:center;font-size:15px;border:1px #f2bc18 solid;border-radius:5px;display:inline-block;color:#f26500;font-weight:bold;box-shadow:0 5px 5px #cccccc;background-image: -moz-linear-gradient(top, #fff8b4, #ffe983); /* Firefox */background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fff8b4), color-stop(1, #ffe983)); /* Saf4+, Chrome */filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6ff00', endColorstr='#538300', GradientType='0'); /* IE*/}
 .slp .food-hd .foodtext .BuyNo .Buybutton .Backhome:hover{background-image: -moz-linear-gradient(top, #ffe983, #fff8b4); /* Firefox */background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffe983), color-stop(1, #fff8b4)); /* Saf4+, Chrome */filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#c6ff00', endColorstr='#538300', GradientType='0'); /* IE*/}
-.slp .food-hd .viewhistory{width:184px;height:auto;float:left;border-left:1px #dddddd dotted;}
+.slp .food-hd .viewhistory{width:210px;height:381px;float:left;border-left:1px #dddddd dotted;}
 .slp .food-hd .viewhistory .VHtitle{display:block;width:184px;text-align:center;color:#cccccc;border-bottom:1px #dddddd dotted;}
 .slp .food-hd .viewhistory .Fsulist{overflow:hidden;width:185px;height:auto;}
 .slp .food-hd .viewhistory .Fsulist li{width:175px;height:auto;overflow:hidden;margin:5px;}

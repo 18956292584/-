@@ -1,5 +1,6 @@
 /*public js xianhuachneg.com*/
 /*Tab Search style*/
+
 function selectsearch(theA,word){
  obj=document.getElementById("selectsearch").getElementsByTagName("a");
  for(var i=0;i< obj.length;i++ ){
@@ -7,14 +8,15 @@ function selectsearch(theA,word){
  }
  theA.className='choose';
   if(word=='restaurant_name'){
-   document.getElementById('main_a_serach').action="search_s.html";//Test url
+   document.getElementById('main_a_serach').action="/index/search_s";//Test url
   }else if(word=='food_name'){
-   document.getElementById('main_a_serach').action="search_p.html";//Test url
+   document.getElementById('main_a_serach').action="/index/search_p";//Test url
   }
 }
 //INDEX TAB LIST
 window.onload = function ()
 {
+	document.getElementById('main_a_serach').action="/index/search_s";
 	var oLi = document.getElementById("Indextab").getElementsByTagName("li");
 	var oUl = document.getElementById("Indexcontent").getElementsByTagName("ul");
 	for(var i = 0; i < oLi.length; i++)

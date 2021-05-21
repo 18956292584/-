@@ -41,10 +41,10 @@ $(function(){
  <section class="Topmenubg">
   <div class="Topnav">
    <div class="LeftNav">
-    <a href="register.html">注册</a>/<a href="login.html">登录</a><!--<a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>-->
+    <a href="/user/register">注册</a>/<a href="/user/login">登录</a>
    </div>
    <div class="RightNav">
-    <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a> <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="/user/user_center">用户中心</a> <a href="/user/user_center">我的订单</a> <a href="/user/cart">购物车</a><a href="/business/BusLoad">商家登录</a>
    </div>
   </div>
  </section>
@@ -54,25 +54,25 @@ $(function(){
    <i></i>
    <span>[ 西安邮电大学 ]</span>
   </div>
-  <div class="Search"> 
+  <div class="Search">
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
-   <div class="Search_nav" id="selectsearch">
-    <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
-   </div>
-   <div class="Search_area"> 
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />
-   </div>
+    <div class="Search_nav" id="selectsearch">
+     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
+     <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
+    </div>
+    <div class="Search_area">
+     <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
+     <input type="submit" class="searchbutton" value="搜 索" />
+    </div>
    </form>
-   <p class="hotkeywords"></p>
   </div>
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="../index/">首页</a></li>
-   <li><a href="list">订餐</a></li>
-   <li><a href="category?currentPage=1&paixu=f_price">美食</a></li>
+   <li><a href="/index/">首页</a></li>
+   <li><a href="/index/list?currentPage=1&paixu=b_score">商户</a></li>
+   <li><a href="/index/category?currentPage=1&paixu=f_price">美食</a></li>
+   <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
 </header>
@@ -80,9 +80,9 @@ $(function(){
 <section class="slp">
  <section class="food-hd">
   <div class="foodpic">
-   <img th:src="@{'../static/upload/' + ${food.f_pic}}" id="showimg">
+   <img th:src="@{'/static/upload/' + ${food.f_pic}}" id="showimg">
     <ul class="smallpic">
-     <li><img th:src="@{'../static/upload/' + ${food.f_pic}}" onmouseover="show(this)" onmouseout="hide()"></li>
+     <li><img th:src="@{'/static/upload/' + ${food.f_pic}}" onmouseover="show(this)" onmouseout="hide()"></li>
     </ul>
   </div>
   <div class="foodtext">
@@ -112,7 +112,7 @@ $(function(){
       <p>送幸福积分</p>
      </li>-->
    </ul>
-   <form action="addGwc">
+   <form action="/user/addGwc1">
    <div class="BuyNo">
     <span>我要买：<input type="number" name="food_count" required autofocus min="1" value="1"/>份</span>
     <span th:text="'库存：' + ${food.f_stock}">3258</span>
@@ -126,16 +126,16 @@ $(function(){
      <input name="food_name" th:value="${food.f_name}" style="display:none;"/>
      <input name="bus_name" th:value="${food.b_name}" style="display:none;"/>
      <input name="gwc_state" th:value="1" style="display:none;"/>
-     <a th:href="@{'shop?shopid='+${food.f_b_id}}"><span class="Backhome">进入店铺首页</span></a>
+     <a th:href="@{'/index/shop?shopid='+${food.f_b_id}}"><span class="Backhome">进入店铺首页</span></a>
     </div>
    </div>
   </div>
-  <div class="viewhistory">
+  <div class="viewhistory" style="overflow-y:scroll;">
    <span class="VHtitle">看了又看</span>
    <ul class="Fsulist">
     <tr th:each="top : ${top3food}">
      <li>
-      <a href="detailsp.html" target="_blank" title="酱爆茄子"><img th:src="@{'../static/upload/' + ${top.f_pic}}"></a>
+      <a th:href="'/index/detailsp?foodid=' + ${top.f_id}" title="酱爆茄子"><img th:src="@{'/static/upload/' + ${top.f_pic}}"></a>
       <p th:text="${top.f_name}">酱爆茄子</p>
       <p th:text="'￥' + ${top.f_price}">12.80</p>
      </li>
@@ -152,15 +152,15 @@ $(function(){
  <section class="Bcontent">
   <article>
    <div class="shopcontent">
-  <div class="title2 cf">
-    <ul class="title-list fr cf ">
-     
-      <li>评价详情（5）</li>
-      <li>成交记录（5）</li>
-      <li class="on">详细说明</li>
-      <p><b></b></p>
-    </ul>
-  </div>
+     <div class="title2 cf">
+       <ul class="title-list fr cf ">
+
+         <li>评价详情（5）</li>
+         <li class="on">详细说明</li>
+         <p><b></b></p>
+       </ul>
+     </div>
+   </div>
   <div class="menutab-wrap">
     <!--case1-->
     
@@ -191,49 +191,16 @@ $(function(){
      </div>
     </div>
     <!--case4-->
-    <div class="menutab">
-     <div class="cont_padding">
-     
-      <table width="888">
-       <th width="35%">买家</th>
-       <th width="20%">价格</th>
-       <th width="15%">数量</th>
-       <th width="30%">成交时间</th>
-       <tr height="40">
-        <td>d***t</td>
-        <td>￥59</td>
-        <td>1</td>
-        <td>2014-9-18 11:13:07</td>
-       </tr>
-      </table>
-     
-     </div>
-       <div class="TurnPage">
-         <a href="#">
-          <span class="Prev"><i></i>首页</span>
-         </a>
-         <a href="#"><span class="PNumber">1</span></a>
-         <a href="#"><span class="PNumber">2</span></a>
-         <a href="#">
-         <span class="Next">最后一页<i></i></span>
-        </a>
-       </div>
-   </div>
    <div class="menutab">
       <div class="cont_padding">
-       <img src="upload/tds.jpg">
-       <p>1. 将土豆洗净刮皮。</p>
-       <p>2. 先将土豆切成整齐的大薄片这样是切出均匀的丝的要点。</p>
-       <p>3. 将土豆片切成细丝。</p>
-       <p>4. 用清水将切好的土豆丝泡去淀粉，（这样炒出的土豆丝清爽不粘）</p>
-       <p>5. 将葱切末、辣椒剪成小段、蒜切末、红椒切丝、姜切末。</p>
+       <p th:text="${food.f_introduce}">1. 将土豆洗净刮皮。</p>
       </div>
     </div>
   </article>
   <!--ad&other infor-->
   <aside>
    <!--广告位或推荐位-->
-   <a href="#" title="广告位占位图片" target="_blank"><img src="upload/2014912.jpg"></a>
+   <a href="#" title="广告位占位图片" target="_blank"><img src="/static/upload/2014912.jpg"></a>
   </aside>
  </section>
 </section>
@@ -247,48 +214,6 @@ $(function(){
  </div>
 <footer>
  <section class="Otherlink">
-  <!--<aside>
-   <div class="ewm-left">
-    <p>手机扫描二维码：</p>
-    <img src="images/Android_ico_d.gif">
-    <img src="images/iphone_ico_d.gif">
-   </div>
-   <div class="tips">
-    <p>客服热线</p>
-    <p><i>1830927**73</i></p>
-    <p>配送时间</p>
-    <p><time>09：00</time>~<time>22:00</time></p>
-    <p>网站公告</p>
-   </div>
-  </aside>
-  <section>
-    <div>
-    <span><i class="i1"></i>配送支付</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i2"></i>关于我们</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i3"></i>帮助中心</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
-    </ul>
-    </div>-->
   </section>
  </section>
 <div class="copyright">© 版权所有 2020 

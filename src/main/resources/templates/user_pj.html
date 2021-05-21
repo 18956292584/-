@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
 <meta charset="utf-8" />
@@ -21,10 +22,10 @@ Author URI: http://www.deathghost.cn
  <section class="Topmenubg">
   <div class="Topnav">
    <div class="LeftNav">
-    <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+    <a href="/user/register">注册</a>/<a href="/user/login">登录</a>
    </div>
    <div class="RightNav">
-    <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a> <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="/user/user_center">用户中心</a> <a href="/user/user_center">我的订单</a> <a href="/user/cart">购物车</a><a href="/business/BusLoad">商家登录</a>
    </div>
   </div>
  </section>
@@ -34,147 +35,75 @@ Author URI: http://www.deathghost.cn
    <i></i>
    <span>[ 西安邮电大学 ]</span>
   </div>
-  <div class="Search"> 
+  <div class="Search">
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
-   <div class="Search_nav" id="selectsearch">
-    <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
-   </div>
-   <div class="Search_area"> 
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />
-   </div>
+    <div class="Search_nav" id="selectsearch">
+     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
+     <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
+    </div>
+    <div class="Search_area">
+     <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
+     <input type="submit" class="searchbutton" value="搜 索" />
+    </div>
    </form>
-   <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
   </div>
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="index.html">首页</a></li>
-   <li><a href="list.html">订餐</a></li>
-   <li><a href="category.html">积分商城</a></li>
-   <li><a href="article_read.html">关于我们</a></li>
+   <li><a href="/index/">首页</a></li>
+   <li><a href="/index/list?currentPage=1&paixu=b_score">商户</a></li>
+   <li><a href="/index/category?currentPage=1&paixu=f_price">美食</a></li>
+   <!--<li><a href="category.html">积分商城</a></li>-->
+   <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
 </header>
 <!--Start content-->
 <section class="Psection MT20">
 <nav class="U-nav Font14 FontW">
-  <ul>
-   <li><i></i><a href="user_center.html">我的订单</a></li>
-   <li><i></i><a href="user_address.html">收货地址</a></li>
-   <li><i></i><a href="user_account.html">账户管理</a></li>
-   <li><i></i><a href="#">安全退出</a></li>
-  </ul>
+    <ul>
+        <li><i></i><a href="/user/user_center">我的订单</a></li>
+        <li><i></i><a href="/user/user_address">收货地址</a></li>
+        <li><i></i><a href="/user/user_account">账户管理</a></li>
+        <li><i></i><a href="/user/Offline">安全退出</a></li>
+    </ul>
  </nav>
  <article class="U-article Overflow">
   <span class="Font14 FontW Lineheight35 Block">商家名称：老重庆川菜馆 </span>
   <span class="Font14 FontW Lineheight35 Block">订单编号：201409243195 </span>
- 	<table class="U-order-D">
-    <th>产品</th>
-    <th>数量</th>
-    <th>单价</th>
-    <th>金额</th>
-    <th>给个评价</th>
-    <tr>
-     <td><a href="detailsp.html" target="_blank" title="酸辣土豆丝">酸辣土豆丝</a></td>
-     <td>1</td>
-     <td>￥8.00</td>
-     <td>￥10.00</td>
-     <!--如果未付款，则显示立即付款按钮-->
-     <td> <div contenteditable="true" id="t" text="asdasd"></div></td>
-    </tr>
-  </table>
-   <!--<table class="U-order-A">
-    <tr>
-     <td width="30%" align="right" class="FontW">商家名称：</td>
-     <td> <span class="title">老重庆川菜馆</span>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">商家电话：</td>
-     <td> <span class="title">18956292584</span>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">收货地址：</td>
-     <td><input type="text" name="" class="input_addr" value="丈八北路2000集" required></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">收件人姓名：</td>
-     <td><input type="text" name="" class="input_name" value="deathghost" required></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">手机号码：</td>
-     <td><input type="text" name="" class="input_tel" value="1582551819" required pattern="[0-9]{11}"></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right" class="FontW">订单备注：</td>
-     <td><input type="text" name="" class="input_mark" value="...速度送货哦...谢谢~"></td>
-    </tr>
-    <tr>
-     <td width="30%" align="right"></td>
-     <!--未付款订单，可以修改地址！-->
-     <!--<td><input type="submit" name="" value="确认修改地址" class="Submit">（未付款订单，可以修改地址！）</td>
-   </tr>
-   </table>-->
-   
+    <form name="form" method="post" action="">
+     <table class="U-order-D">
+      <th>产品</th>
+      <th>数量</th>
+      <th>单价</th>
+      <th>金额</th>
+      <th>给个评价</th>
+      <tr th:each="gwc:${orderfoods.order_food}">
+       <td><a href="detailsp.html" target="_blank" title="酸辣土豆丝" th:text="${gwc.food_name}">酸辣土豆丝</a></td>
+       <td th:text="${gwc.food_count}">1</td>
+
+       <td th:text="'￥' + ${gwc.food_price}">￥8.00</td>
+       <td th:text="'￥' + ${gwc.food_price} * ${gwc.food_count}">10.00</td>
+       <!--如果未付款，则显示立即付款按钮-->
+       <td> <textarea contenteditable="true" id="t" type="text" name="e_evaluate"></textarea></td>
+       <input th:value="${gwc.food_id}" style="display: none" name="e_food_id"/>
+       <input th:value="${gwc.cust_id}" style="display: none" name="e_user_id"/>
+       <input th:value="${order_id}" style="display: none" name="e_order_id"/>
+       <input th:value="${gwc.bus_id}" style="display: none" name="e_b_id"/>
+      </tr>
+
+     </table>
+     <td width="30%" class="Font14 FontW Lineheight35" align="right">打个评分：</td>
+     <input type="number"  name="order_pf" value="5" class="modal_input input_name" min="1" max="5" >
+     <input type="button" name="" value="提交" class="Submit" style="float: right;" onClick="this.form.action='pjFood';this.form.submit();">
+    </form>
+
  </article>
 </section>
 <!--End content-->
 <div class="F-link">
   <span>友情链接：</span>
-  
-  
-  
-  
  </div>
-<!--<footer>
- <section class="Otherlink">
-  <aside>
-   <div class="ewm-left">
-    <p>手机扫描二维码：</p>
-    <img src="images/Android_ico_d.gif">
-    <img src="images/iphone_ico_d.gif">
-   </div>
-   <div class="tips">
-    <p>客服热线</p>
-    <p><i>1830927**73</i></p>
-    <p>配送时间</p>
-    <p><time>09：00</time>~<time>22:00</time></p>
-    <p>网站公告</p>
-   </div>
-  </aside>
-  <section>
-    <div>
-    <span><i class="i1"></i>配送支付</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i2"></i>关于我们</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>
-    </ul>
-    </div>
-    <div>
-    <span><i class="i3"></i>帮助中心</span>
-    <ul>
-     <li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>
-     <li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>
-    </ul>
-    </div>
-  </section>
- </section>
- <div class="copyright">© 版权所有 2020 
-</footer>-->
 <script>
 	 	
 </script>

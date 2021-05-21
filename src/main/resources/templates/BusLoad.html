@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="../static/style/reset.css" rel="stylesheet" />
+    <link href="../static/style/index.css" rel="stylesheet" />
+    <title>登录页</title>
+</head>
+<body>
+    <div class="LoginBox">
+        <form action="/business/Load"  method="post" name="form">
+            <div class="VerticalCenteredBox">
+                <div class="LoginHead">
+                    商家后台管理系统
+                </div>
+                <div class="LoginUserBoxOut ">
+                    <div class="LoginUserBox mar_top30">
+                        <input class="LoginUserInput" placeholder="请输入账号" name="id"/>
+                        <span>请输入账号</span>
+                    </div>
+                </div>
+                <div class="LoginUserBoxOut">
+                    <div class="LoginUserBox">
+                        <input class="LoginUserInput" placeholder="请输入密码" type="password" name="password"/>
+                        <span>请输入密码</span>
+                    </div>
+                </div>
+
+                <div class="LoginUserBoxOut">
+                    <div class="LoginLastBox clearfix">
+                        <a href="UserManagement.html">
+                            <input type="submit" class="RightBox" value="登录">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</body>
+<script th:inline="javascript">
+    if([[${res}]] != null){
+        alert([[${res}]]);
+    }
+</script>
+</html>

@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public List<Order> dfk(int userId,int state) {
+    public List<Order> dfk(String userId,int state) {
         return orderMapper.getOrder(userId,state);
     }
 
@@ -100,6 +100,8 @@ public class OrderServiceImpl implements OrderService {
         return str;
     }
 
+
+
     private  String  check2(Map<String, String> params) throws AlipayApiException {
         String outTradeNo = params.get("out_trade_no");
         // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
@@ -126,5 +128,28 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.setOrderState(outTradeNo,1);
 
         return order.getOrder_user();
+    }
+
+    @Override
+    public void deleteOrder(String orderId) {
+        orderMapper.deleteOrder(orderId);
+    }
+
+    @Override
+    public void confirmReceipt(String order_id) {
+        orderMapper.setOrderState(order_id,3);
+    }
+
+    @Override
+    public List<Order> dfkBus(String bus, int i) {
+        return orderMapper.getOrderByBus(bus,i);
+    }
+
+    @Override
+    public void order_fh(String order_id) {
+        orderMapper.setOrderState(order_id,2);
+
+
+        //todo
     }
 }

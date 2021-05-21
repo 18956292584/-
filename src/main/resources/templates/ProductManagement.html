@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="../static/style/reset.css" rel="stylesheet" />
+    <link href="../static/style/iconfont.css" rel="stylesheet" />
+    <link href="../static/style/index.css" rel="stylesheet" />
+    <link href="../static/style/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../static/js/public.js"></script>
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <script type="text/javascript" src="../static/js/jqpublic.js"></script>
+    <script src="../static/js/jquery-1.9.1.min.js"></script>
+    <script src="../static/js/f.js"></script>
+    <title>产品管理</title>
+</head>
+<body>
+	<div class="PublicHead clearfix">
+        <div class="leftBox clearfix">
+            <div class="companyLogo">
+                <img src="../static/images/logo.jpg" style="width: 100px;height: 48px;"/>
+           </div>
+           <div class="companyText">
+                西邮外卖商家后台系统
+           </div>
+        </div>
+        <div class="RightBox clearfix">
+            <div class="UserPhotoBox">
+                <div class="UserPic">
+                    <img th:src="'../static/upload/'+ ${bus.getB_pic()}" />
+                </div>
+                <div class="UserName">
+                    管理员
+                </div>
+            </div>
+            <a href="/business/Offline">
+                <div class="dropOutBox">
+                    <i class="iconfont icon-app_icons--">
+                    </i>
+                    <span>退出</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="PublicDownWhole clearfix Cfn">
+        <!--左侧-->
+        <nav class="U-nav Font14 FontW">
+		 <ul>
+		  <li><i></i><a href="/business/Bus_center">订单列表</a></li>
+		  <li><i></i><a href="/business/ProductManagement?state=1">产品管理</a></li>
+		  <li><i></i><a href="/business/bus_Account">账户管理</a></li>
+		 </ul>
+		 </nav>
+        <!--右侧--><!--<article class="U-article Overflow">-->
+        <div class=" U-article Overflow" style="width: 910px;">
+            <div class="PublicContentBox">
+                
+                <!--查询-->
+                <div class="InquireBox clearfix">
+                    <form action="/business/searchFood">
+                        <div class="InquireleftBox">
+                            <div class="Text">产品名称：</div>
+                            <div class="InputDiv">
+                                <input class="phoneInput" placeholder="产品名称" name="foodName"/>
+                                <input class="phoneInput" style="display: none" name="busId" th:value="${b_id}"/>
+                            </div>
+                        </div>
+
+                        <div class="PublicBtnIcon Color1Btn fr">
+                            <i class="iconfont icon-icon-chaxun"></i>
+                            <input type="submit" th:value="查询"/>
+                        </div>
+                    </form>
+                </div>
+                <!--表修改-->
+                <div class="InquireTableBox">
+                    <div class="headbox">
+                        <div class="headboxtext">
+                            <span class="span1">后台管理产品列表</span>
+                        </div>
+
+                        <div class="PublicBtnIcon Color3Btn">
+                            <i class="iconfont"></i>
+                            <a href="/business/ProductManagement?state=1" style="color: #fff;">在售</a>
+                        </div>
+                        <div class="PublicBtnIcon Color4Btn" >
+                            <i class="iconfont"></i>
+                            <a href="/business/ProductManagement?state=2" style="color: #fff;">已下架</a>
+                        </div>
+
+                        <div class="PublicBtnIcon Color2Btn  Js_edit" style="float: right">
+                            <i class="iconfont"></i>
+                            <span>添加</span>
+                        </div>
+                    </div>
+
+                    <!--查询到的表格-->
+
+                    <div class="InquireSelectTable">
+                        <table class="PublicTableCss">
+                            <thead>
+                                <tr>
+                                    <td>状态</td>
+                                    <td>ID</td>
+                                    <td>产品图片</td>
+                                    <td>产品名称</td>
+                                    <td>产品描述</td>
+                                    <td>产品价格</td>
+                                    <td>月售量</td>
+                                    <td>操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="food : ${allfood}">
+                                    <td th:if="${food.f_state eq 1}" th:value="在售">
+                                        在售
+                                    </td>
+                                    <td th:unless="${food.f_state eq 1}" th:value="下架">
+                                        下架
+                                    </td>
+                                    <td th:text="${food.f_id}">1</td>
+                                    <td>
+                                        <div class="productImgBox">
+                                            <img th:src="@{'/static/upload/' + ${food.f_pic}}" />
+                                        </div>
+                                    </td>
+                                    <td th:text="${food.f_name}">新鲜的橙子</td>
+                                    <td th:text="${food.f_introduce}" style="width: 273px">新鲜的橙子真的很好吃新鲜的橙子真的很好吃新鲜的橙子真的很好吃</td>
+                                    <td th:text="${food.f_price}">1200.00元</td>
+                                    <td th:text="${food.f_sales_volume}">998份</td>
+                                    <td style="width: 96px">
+
+                                        <div class="PublicTableBtnIcon Color3Btn" th:onclick="Js_edit1([[${food.f_name}]],[[${food.f_id}]],[[${food.f_pic}]],[[${food.f_price}]],[[${food.f_introduce}]])" >
+                                            <i class="iconfont icon-tubiaozhizuomobanyihuifu-"></i>
+                                            <span>编辑</span>
+                                        </div>
+
+                                        <div class="PublicTableBtnIcon Color4Btn ">
+                                            <i class="iconfont icon-shanchu" ></i>
+                                            <span>
+                                                 <a th:href="'/business/foodState?state=0&foodid='+${food.f_id}">删除</a>
+                                            </span>
+                                        </div>
+                                        <div class="PublicTableBtnIcon Color2Btn " th:if="${food.f_state eq 2}">
+                                            <i class="iconfont icon-tubiaozhizuomobanyihuifu-" ></i>
+                                            <span >
+                                                 <a th:href="'/business/foodState?state=1&foodid='+${food.f_id}">上架</a>
+                                            </span>
+
+                                        </div>
+                                        <div class="PublicTableBtnIcon Color5Btn" th:if="${food.f_state eq 1}">
+                                            <i class="iconfont icon-tubiaozhizuomobanyihuifu- "></i>
+                                            <span >
+                                                <a th:href="'/business/foodState?state=2&foodid='+${food.f_id}">下架</a>
+                                            </span>
+
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!--分页-->
+                    <!--<div class="PageNumber">-->
+                        <!--<div class="NumbersBox">-->
+                            <!--<div class="LeftArrow">-->
+                                <!--上一页-->
+                            <!--</div>-->
+                            <!--<ul>-->
+                                <!--<li class="Select">1</li>-->
+                                <!--<li class="">2</li>-->
+                                <!--<li class="">...</li>-->
+                                <!--<li class="">4</li>-->
+                                <!--<li class="">5</li>-->
+                            <!--</ul>-->
+                            <!--<div class="RightArrow ">-->
+                                <!--下一页-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--添加修改产品信息浮层-->
+    <div class="PublicFloatBox adduser">
+        <div class="kongfx">
+            <div class=" wid400">
+                <div class="f_Head">
+                    <span>添加产品</span>
+                    <i class="Js_closeBtn iconfont icon-buoumaotubiao20 fr"></i>
+                </div>
+
+                <div class="f_content">
+                    <form action="/business/newfood"  method="post" name="form2" id="form2">
+                    <div class="f_alonediv">
+                        <div class="f_alone_name">
+                            选择图片:
+                        </div>
+                        <div class="f_alone_input">
+                            <input type="file"  accept="image/*" id="photoFile" style="width: 234px"/>
+                            <input type="text" name="f_pic"  id="f_pic" style="display: none"/>
+                            <input type="button" value="上传" class="publicf_btn1"  onclick="submitForm1()" style="width: 38px;height: 26px;line-height: 26px;">
+                        </div>
+                    </div>
+                    <div class="f_alonediv">
+                        <div class="f_alone_name">
+                            产品名称:
+                        </div>
+                        <div class="f_alone_input">
+                            <input class="f_p_input" name="f_name" id="f_name"/>
+                        </div>
+                    </div>
+                    <div class="f_alonediv">
+                        <div class="f_alone_name">
+                            产品描述:
+                        </div>
+                        <div class="f_alone_input">
+                            <input class="f_p_input" name="f_introduce" id="f_introduce"/>
+                        </div>
+                    </div>
+                    <div class="f_alonediv">
+                        <div class="f_alone_name">
+                            产品价格:
+                        </div>
+                        <div class="f_alone_input">
+                            <input class="f_p_input" type="text" id="f_price" name="f_price" value="0.0" />
+                            <input  type="text"  name="f_b_id" th:value="${b_id}" style="display:none;" />
+                            <input  type="text"  name="f_id" id="f_id" style="display:none;" />
+                        </div>
+                    </div>
+                    <div class="f_alonediv1">
+                        <div class="f_alone_name">
+                        </div>
+                        <div class="f_alone_input1">
+                            <!--publicbtn-->
+                            <div class="publicf_btn">
+                                <input class="publicf_btn1" value="确定" type="submit"/>
+
+                                <div class="publicf_btn2 fr Js_closeBtn">
+                                    取消
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" defer="defer">
+    Js_edit1 = function (f_name,f_id,f_pic,f_price,f_introduce){
+        $("#f_name").val(f_name);
+        $("#f_id").val(f_id);
+        $("#f_pic").val(f_pic);
+        $("#f_introduce").val(f_introduce);
+        $("#f_price").val(f_price);
+
+        $( "#form2" ).attr( 'action' ,"/business/changeFood");
+        $(".adduser").fadeIn(200);
+    }
+
+    //添加
+    function submitForm1(){
+        if ($("#photoFile").val() == '') {
+            return;
+        }
+        var formData = new FormData();
+        formData.append('photo', document.getElementById('photoFile').files[0]);
+        $.ajax({
+            url:"/business/upload",
+            type:"post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                if (data.type == "success") {
+                    $("#f_pic").val(data.filename);
+                   alert("上传成功");
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error:function(data) {
+                alert("上传失败")
+            }
+        });
+    }
+
+    //设置金额格式
+    $(document).ready(function(){
+        bindKeyEvent($("#f_price"));
+    });
+    function bindKeyEvent(obj){
+        obj.keyup(function () {
+            var reg = $(this).val().match(/\d+\.?\d{0,2}/);
+            var txt = '';
+            if (reg != null) {
+                txt = reg[0];
+            }
+            $(this).val(txt);
+        }).change(function () {
+            $(this).keypress();
+            var v = $(this).val();
+            if (/\.$/.test(v))
+            {
+                $(this).val(v.substr(0, v.length - 1));
+            }
+        });
+    }
+
+</script>
+</html>

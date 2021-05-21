@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="author" content="西邮校园外卖"/>
+<title>DeathGhost-用户中心</title>
+<meta name="keywords" content="西邮校园外卖" />
+<meta name="description" content="西邮校园外卖" />
+<meta name="author" content="西邮校园外卖"/>
+<link href="../static/style/reset.css" rel="stylesheet" />
+<link href="../static/style/iconfont.css" rel="stylesheet" />
+<link href="../static/style/index.css" rel="stylesheet" />
+<link href="../static/style/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../static/js/public.js"></script>
+<script type="text/javascript" src="../static/js/jquery.js"></script>
+<script type="text/javascript" src="../static/js/jqpublic.js"></script>
+<script src="../static/js/jquery-1.9.1.min.js"></script>
+<script src="../static/js/f.js"></script>
+<!--
+Author: DeathGhost
+Author URI: http://www.deathghost.cn
+-->
+</head>
+<body>
+<header>
+	<div class="PublicHead clearfix">
+        <div class="leftBox clearfix">
+            <div class="companyLogo">
+                <img src="../static/images/logo.jpg" style="width: 100px;height: 48px;"/>
+           </div>
+           <div class="companyText">
+                西邮外卖商家后台系统
+           </div>
+        </div>
+        <div class="RightBox clearfix">
+            <div class="UserPhotoBox">
+                <div class="UserPic">
+                    <img th:src="'../static/upload/'+ ${bus.b_pic}" />
+                </div>
+                <div class="UserName">
+                    管理员
+                </div>
+            </div>
+            <a href="/business/Offline">
+                <div class="dropOutBox">
+                    <i class="iconfont icon-app_icons--">
+                    </i>
+                    <span>退出</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</header>
+<!--Start content-->
+<section class="Psection MT20">
+	<nav class="U-nav Font14 FontW">
+    <ul>
+        <li><i></i><a href="/business/Bus_center">订单列表</a></li>
+        <li><i></i><a href="/business/ProductManagement?state=1">产品管理</a></li>
+        <li><i></i><a href="/business/bus_Account">账户管理</a></li>
+    </ul>
+	</nav>
+    <article class="U-article Overflow">
+        <!--user Account-->
+        <section class="AccManage Overflow">
+            <span class="AMTitle Block Font14 FontW Lineheight35">账户管理</span>
+            <!--<p>登陆邮箱：232***413@qq.com ( <a href="#" target="_blank">更换手机号码</a> )</p>
+            <p>手机号码：183****5673 ( <a href="#" target="_blank">更换手机号码</a> ) ( <a href="#" target="_blank">解绑手机</a> )</p>-->
+            <!--<p>上次登陆：2014年09月22日 11:40:36( *如非本人登陆，请立即<a href="#" target="_blank">修改您的密码</a>！ )</p>-->
+            <form action="ChangeUserInfo">
+                <table>
+                    <tr>
+                        <td width="30%" align="right">*修改Logo：</td>
+                        <td><input name="f_pic" type="file" accept="image/*" id="photoFile"><button type="button" onclick="submitForm1()">上传</button></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">账号：</td>
+                        <td><input type="text" name="user_id" th:value="${bus.b_id}" readOnly="true"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">*店铺名称：</td>
+                        <td><input type="text" name="user_name" required="required" th:value="${bus.b_name}"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">*店铺地址：</td>
+                        <td><input type="text" name="user_name" required="required" th:value="${bus.b_address}"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">*店铺介绍：</td>
+                        <td><input type="text" name="b_Introduction" th:value="${bus.b_Introduction}"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">*密码：</td>
+                        <td><input type="password" required="required" name="user_password" th:value="${bus.b_password}"></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" align="right">*联系方式：</td>
+                        <td><input type="tel" name="user_phone" required="required" th:value="${bus.b_phone}"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input name="qwe" type="submit" value="保存" class="Submit"></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+    </article>
+</section>
+<!--End content-->
+<!--<div class="F-link">
+  <span>友情链接：</span>
+ </div>-->
+<!--<footer>
+</footer>-->
+<script  th:inline="javascript">
+    if([[${order_state}]] != 0){
+        $("#ytsubmit").css('display','none');
+        $(".input_addr").attr("readonly","readonly");
+        $(".input_name").attr("readonly","readonly");
+        $(".input_tel").attr("readonly","readonly");
+        $(".input_mark").attr("readonly","readonly");
+    }
+
+    function submitForm1(){
+        if ($("#photoFile").val() == '') {
+            return;
+        }
+        var formData = new FormData();
+        formData.append('photo', document.getElementById('photoFile').files[0]);
+        $.ajax({
+            url:"/business/upload",
+            type:"post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                if (data.type == "success") {
+                    $("#f_pic").val(data.filename);
+                    alert("上传成功");
+                } else {
+                    alert(data.msg);
+                }
+            },
+            error:function(data) {
+                alert("上传失败")
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

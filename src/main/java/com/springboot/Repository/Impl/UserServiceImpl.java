@@ -2,10 +2,7 @@ package com.springboot.Repository.Impl;
 
 import com.springboot.Repository.UserService;
 import com.springboot.entity.*;
-import com.springboot.mapper.AddressMapper;
-import com.springboot.mapper.GwcMapper;
-import com.springboot.mapper.OrderMapper;
-import com.springboot.mapper.UserMapper;
+import com.springboot.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +31,13 @@ public class UserServiceImpl implements UserService {
     @Autowired
     OrderMapper orderMapper;
 
+    //评价接口
+    @Autowired
+    EvaluateMapper evaluateMapper;
 
+    //商家接口
+    @Autowired
+    BusinessMapper businessMapper;
     /**
      * 用户注册逻辑
      * @param user
@@ -73,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     //更改购物车食物数量
     @Override
-    public void updateNum(int custId, int foodId, int num) {
+    public void updateNum(String custId, int foodId, int num) {
          gwc.updateNum(num,custId,foodId);
     }
 
@@ -93,11 +96,63 @@ public class UserServiceImpl implements UserService {
         } else {
             gwc.add(g);
         }
+
+
     }
 
     @Override
     public List<Address> getAddress(String userId) {
         return address.getAddress(userId);
     }
+
+    @Override
+    public void addAddress(Address address) {
+        this.address.addAddress(address);
+    }
+
+    @Override
+    public void ChangeAddress(Address address) {
+        this.address.ChangeAddress(address);
+    }
+
+    @Override
+    public void DeletAddress(Address address) {
+        this.address.DeletAddress(address);
+    }
+
+    @Override
+    public User getUser(String userId) {
+        return this.userMapper.getUser(userId);
+    }
+
+    @Override
+    public void changeUserInfo(User user) {
+        this.userMapper.changeUserInfo(user);
+    }
+
+    @Override
+    public void dealPJ(ArrayList<Integer> e_food_id, ArrayList<String> e_evaluate, ArrayList<String> e_user_id, ArrayList<String> e_order_id, ArrayList<String> e_b_id, double order_pf) {
+        Date date = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = ft.format(date);
+        for(int i = 0; i < e_food_id.size(); i++){
+            if(e_evaluate.get(i) == ""){
+                continue;
+            }
+            Evaluate evaluate = new Evaluate();
+            evaluate.setE_date(str);
+            evaluate.setE_evaluate(e_evaluate.get(i));
+            evaluate.setE_food_id(e_food_id.get(i));
+            evaluate.setE_order_id(e_order_id.get(0));
+            evaluate.setE_user_id(e_user_id.get(i));
+            evaluate.setE_b_id(e_b_id.get(i));
+            evaluateMapper.add(evaluate);
+        }
+
+        businessMapper.updateScore(order_pf);
+        orderMapper.setOrderState(e_order_id.get(0),4);
+
+    }
+
 
 }

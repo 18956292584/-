@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<!--Start content-->
+<section class="Fsl">
+ <ul>
+  <tr th:each="business : ${allbusiness}">
+   <li>
+    <a th:href="@{'/index/shop?shopid='+${business.b_id}}" target="_blank" title="调用产品名/店铺名"><img th:src="@{'../static/upload/' + ${business.b_pic}}"></a>
+     <h3 th:text="${business.b_name}">【大明宫】***川菜馆</h3>
+     <h4></h4>
+    <p th:text="'月售量： '+ ${business.b_monthly_sales} + '&nbsp&nbsp'">主食：炒菜</p>
+    <p th:text="'店铺地址：' + ${business.b_address}">地址：西安市莲湖区土门十字往右100米</p>
+    <p th:text="'店铺电话：' + ${business.b_phone}">店铺电话：*****</p>
+    <p>
+    <span class="Score-l">
+      <span th:each="i,stat:${#numbers.sequence(1, 5)}">
+        <img th:if="${stat.count< business.b_score}" src="../static/images/star-on.png">
+        <img th:if="${stat.count >business.b_score}" src="../static/images/star-off.png">
+      </span>
+    <span class="Score-v" th:text="${business.b_score}">4.8</span>
+    </span>
+     <span class="DSBUTTON"><a th:href="@{'/index/shop?shopid='+${business.b_id}}" target="_blank" class="Fontfff">点外卖</a></span>
+    </p>
+   </li>
+  </tr>
+ </ul>
+</section>

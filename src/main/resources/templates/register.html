@@ -22,39 +22,39 @@ Author URI: http://www.deathghost.cn
  <section class="Topmenubg">
   <div class="Topnav">
    <div class="LeftNav">
-    <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
+    <a href="/user/register">注册</a>/<a href="/user/login">登录</a>
    </div>
    <div class="RightNav">
-    <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a> <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="/user/user_center">用户中心</a> <a href="/user/user_center">我的订单</a> <a href="/user/cart">购物车</a><a href="/business/BusLoad">商家登录</a>
    </div>
   </div>
  </section>
  <div class="Logo_search">
   <div class="Logo">
-   <img src="../static/images/logo.jpg" title="DeathGhost" alt="模板">
+   <img src="../static/images/logo.jpg" title="校园外卖">
    <i></i>
-   <span>西安市 [ <a href="#">莲湖区</a> ]</span>
+   <span>[ 西安邮电大学 ]</span>
   </div>
-  <div class="Search"> 
-   <form th:action="@{register}" method="post" id="main_a_serach" onsubmit="return check_search(this)">
-   <div class="Search_nav" id="selectsearch">
-    <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
-   </div>
-   <div class="Search_area"> 
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />
-   </div>
+  <div class="Search">
+   <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
+    <div class="Search_nav" id="selectsearch">
+     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
+     <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
+    </div>
+    <div class="Search_area">
+     <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
+     <input type="submit" class="searchbutton" value="搜 索" />
+    </div>
    </form>
-   <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
   </div>
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-   <li><a href="index.html">首页</a></li>
-   <li><a href="list.html">订餐</a></li>
-   <li><a href="category.html">积分商城</a></li>
-   <li><a href="article_read.html">关于我们</a></li>
+   <li><a href="/index/">首页</a></li>
+   <li><a href="/index/list?currentPage=1&paixu=b_score">商户</a></li>
+   <li><a href="/index/category?currentPage=1&paixu=f_price">美食</a></li>
+   <!--<li><a href="category.html">积分商城</a></li>-->
+   <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
 </header>
@@ -63,36 +63,38 @@ Author URI: http://www.deathghost.cn
  <form action="registerUser"  method="post">
   <table class="Register">
   <tr>
-  <td width="40%" align="right" class="FontW">用户名：</td>
-  <td><input type="text" name="user_id" required autofocus></td>
+  <td width="40%" align="right" class="FontW">账号：</td>
+  <td><input type="text" name="user_id" required autofocus placeholder="手机号码"  pattern="[0-9]{11}"></td>
   </tr>
   <tr>
-  <td width="40%" align="right" class="FontW">昵称：</td>
-  <td><input type="text" name="user_name" required autofocus></td>
+    <td width="40%" align="right" class="FontW">密码：</td>
+    <td><input type="password" name="user_password" placeholder="字母或数字,长度6—12字符" required pattern="^[a-zA-Z]\w{5,11}$"></td>
   </tr>
-  <tr>
-  <td width="40%" align="right" class="FontW">密码：</td>
-  <td><input type="password" name="user_password" required></td>
-  </tr>
+
+
   <tr>
   <td width="40%" align="right" class="FontW">再次确认：</td>
-  <td><input type="password" name="" required></td>
+  <td><input type="password" name=""  placeholder="字母或数字,长度6—12字符" required pattern="^[a-zA-Z]\w{5,11}$"></td>
+  </tr>
+  <tr>
+    <td width="40%" align="right" class="FontW">昵称：</td>
+    <td><input type="text" name="user_name" placeholder="不能出现特殊字符" required autofocus pattern="{1,20}"></td>
   </tr>
   <tr>
   <td width="40%" align="right" class="FontW">手机号码：</td>
   <td><input type="text" name="user_phone" required pattern="[0-9]{11}"></td>
   </tr>
   <tr>
-  <td width="40%" align="right" class="FontW">收货地址：</td>
-  <td><input type="text" name="user_host"></td>
-  </tr>
-  <tr>
-  <td width="40%" align="right" class="FontW">验证码：</td>
-  <td><input type="text" name="" required><img src="../static/upload/captcha.png" style="margin-left:8px; vertical-align:bottom" width="83" height="36"></td>
+   <td width="40%" align="right" class="FontW">验证码：</td>
+   <td><input type="text" value="" placeholder="请输入验证码（区分大小写）" id ="text">
+    <canvas id="canvas" width="83" height="36" onclick="dj()"
+            style="border: 1px solid #ccc;
+         border-radius: 5px; margin-bottom: -13px;"></canvas>
+   </td>
   </tr>
   <tr>
   <td width="40%" align="right"></td>
-  <td><input type="submit" name="" class="Submit_b" value="注 册">( 已经是会员，<a href="login.html" class="BlueA">请登录</a> )</td>
+  <td><input type="button" name="" class="Submit_b" value="注 册" onClick="if(sublim()){this.form.submit()}">( 已经是会员，<a href="/user/login" class="BlueA">请登录</a> )</td>
   </tr>
   </table>
  </form>
@@ -101,63 +103,85 @@ Author URI: http://www.deathghost.cn
   if([[${res}]] != null){
    alert([[${res}]]);
   }
+  var show_num = [];
+  draw(show_num);
+  function dj(){
+   draw(show_num);
+  }
+  function sublim(){
+   var val=document.getElementById("text").value;
+   var num = show_num.join("");
+   if(val==''){
+    alert('请输入验证码！');
+    return false;
+   }else if(val == num){
+    return true;
+   }else{
+    alert('验证码错误！\n你输入的是:  '+val+"\n正确的是:  "+num+'\n请重新输入！');
+    document.getElementById("text").value='';
+    draw(show_num);
+    return false;
+   }
+
+
+
+  }
+  function draw(show_num) {
+   var canvas_width=document.getElementById('canvas').clientWidth;
+   var canvas_height=document.getElementById('canvas').clientHeight;
+   var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
+   var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
+   canvas.width = canvas_width;
+   canvas.height = canvas_height;
+   var sCode = "A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0,q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m";
+   var aCode = sCode.split(",");
+   var aLength = aCode.length;//获取到数组的长度
+
+   for (var i = 0; i <= 3; i++) {
+    var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
+    var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
+    var txt = aCode[j];//得到随机的一个内容
+    show_num[i] = txt;
+    var x = 10 + i * 20;//文字在canvas上的x坐标
+    var y = 20 + Math.random() * 8;//文字在canvas上的y坐标
+    context.font = "bold 23px 微软雅黑";
+
+    context.translate(x, y);
+    context.rotate(deg);
+
+    context.fillStyle = randomColor();
+    context.fillText(txt, 0, 0);
+
+    context.rotate(-deg);
+    context.translate(-x, -y);
+   }
+   for (var i = 0; i <= 5; i++) { //验证码上显示线条
+    context.strokeStyle = randomColor();
+    context.beginPath();
+    context.moveTo(Math.random() * canvas_width, Math.random() * canvas_height);
+    context.lineTo(Math.random() * canvas_width, Math.random() * canvas_height);
+    context.stroke();
+   }
+   for (var i = 0; i <= 30; i++) { //验证码上显示小点
+    context.strokeStyle = randomColor();
+    context.beginPath();
+    var x = Math.random() * canvas_width;
+    var y = Math.random() * canvas_height;
+    context.moveTo(x, y);
+    context.lineTo(x + 1, y + 1);
+    context.stroke();
+   }
+  }
+  function randomColor() {//得到随机的颜色值
+   var r = Math.floor(Math.random() * 256);
+   var g = Math.floor(Math.random() * 256);
+   var b = Math.floor(Math.random() * 256);
+   return "rgb(" + r + "," + g + "," + b + ")";
+  }
 
 
  </script>
-<!--</section>-->
-<!--&lt;!&ndash;End content&ndash;&gt;-->
-<!--<div class="F-link">-->
-  <!--<span>友情链接：</span>-->
 
- <!--</div>-->
-<!--<footer>-->
- <!--<section class="Otherlink">-->
-  <!--<aside>-->
-   <!--<div class="ewm-left">-->
-    <!--<p>手机扫描二维码：</p>-->
-    <!--<img src="../static/images/Android_ico_d.gif">-->
-    <!--<img src="../static/images/iphone_ico_d.gif">-->
-   <!--</div>-->
-   <!--<div class="tips">-->
-    <!--<p>客服热线</p>-->
-    <!--<p><i>1830927**73</i></p>-->
-    <!--<p>配送时间</p>-->
-    <!--<p><time>09：00</time>~<time>22:00</time></p>-->
-    <!--<p>网站公告</p>-->
-   <!--</div>-->
-  <!--</aside>-->
-  <!--<section>-->
-    <!--<div>-->
-    <!--<span><i class="i1"></i>配送支付</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<span><i class="i2"></i>关于我们</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<span><i class="i3"></i>帮助中心</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-  <!--</section>-->
- <!--</section>-->
-<div class="copyright">© 版权所有 2020
-</footer>
 
 </body>
 </html>

@@ -18,13 +18,41 @@ public class Food {
     //食物对应的商家名称
     private String b_name;
     //食物状态
-    private boolean f_state;
+    private int f_state;
     //食物说明
     private String f_introduce;
     //食物图片
     private String f_pic;
     //食物价格
     private double f_price;
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "f_id=" + f_id +
+                ", f_name='" + f_name + '\'' +
+                ", f_stock=" + f_stock +
+                ", f_sales_volume=" + f_sales_volume +
+                ", f_b_id=" + f_b_id +
+                ", b_name='" + b_name + '\'' +
+                ", f_state=" + f_state +
+                ", f_introduce='" + f_introduce + '\'' +
+                ", f_pic='" + f_pic + '\'' +
+                ", f_price=" + f_price +
+                '}';
+    }
+
+    public void setF_b_id(int f_b_id) {
+        this.f_b_id = f_b_id;
+    }
+
+    public int getF_state() {
+        return f_state;
+    }
+
+    public void setF_introduce(String f_introduce) {
+        this.f_introduce = f_introduce;
+    }
 
     public int getF_id() {
         return f_id;
@@ -62,10 +90,6 @@ public class Food {
         return f_b_id;
     }
 
-    public void setF_b_id(int f_b_id) {
-        this.f_b_id = f_b_id;
-    }
-
     public String getB_name() {
         return b_name;
     }
@@ -74,11 +98,9 @@ public class Food {
         this.b_name = b_name;
     }
 
-    public boolean isF_state() {
-        return f_state;
-    }
 
-    public void setF_state(boolean f_state) {
+
+    public void setF_state(int f_state) {
         this.f_state = f_state;
     }
 
@@ -86,9 +108,6 @@ public class Food {
         return f_introduce;
     }
 
-    public void setF_introduce(String f_introduce) {
-        this.f_introduce = f_introduce;
-    }
 
     public String getF_pic() {
         return f_pic;

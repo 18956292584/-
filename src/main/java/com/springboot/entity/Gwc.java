@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Gwc {
     private int	gwc_id;
-    private int	cust_id;
+    private String cust_id;
     private int	food_id;
     private int	bus_id;
     private String	food_pic;
@@ -31,6 +31,14 @@ public class Gwc {
                 '}';
     }
 
+    public String getCust_id() {
+        return cust_id;
+    }
+
+    public void setCust_id(String cust_id) {
+        this.cust_id = cust_id;
+    }
+
     public boolean isGwc_state() {
         return gwc_state;
     }
@@ -47,13 +55,6 @@ public class Gwc {
         this.gwc_id = gwc_id;
     }
 
-    public int getCust_id() {
-        return cust_id;
-    }
-
-    public void setCust_id(int cust_id) {
-        this.cust_id = cust_id;
-    }
 
     public int getFood_id() {
         return food_id;

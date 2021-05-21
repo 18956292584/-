@@ -19,16 +19,16 @@ Author URI: http://www.deathghost.cn
 </head>
 <body>
 <header>
- <section class="Topmenubg">
-  <div class="Topnav">
-   <div class="LeftNav">
-    <a href="register.html">注册</a>/<a href="login.html">登录</a><a href="#">QQ客服</a><a href="#">微信客服</a><a href="#">手机客户端</a>
-   </div>
-   <div class="RightNav">
-    <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a> <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
-   </div>
-  </div>
- </section>
+    <section class="Topmenubg">
+        <div class="Topnav">
+            <div class="LeftNav">
+                <a href="/user/register">注册</a>/<a href="/user/login">登录</a>
+            </div>
+            <div class="RightNav">
+                <a href="/user/user_center">用户中心</a> <a href="/user/user_center">我的订单</a> <a href="/user/cart">购物车</a><a href="/business/BusLoad">商家登录</a>
+            </div>
+        </div>
+    </section>
  <div class="Logo_search">
     <div class="Logo">
      <img src="../static/images/logo.jpg" title="校园外卖">
@@ -46,14 +46,13 @@ Author URI: http://www.deathghost.cn
    <input type="submit" class="searchbutton" value="搜 索" />
    </div>
    </form>
-   <p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>
   </div>
  </div>
  <nav class="menu_bg">
   <ul class="menu">
-      <li><a href="../index/">首页</a></li>
-      <li><a href="list">订餐</a></li>
-      <li><a href="category?currentPage=1&paixu=f_price">美食</a></li>
+      <li><a href="/index/">首页</a></li>
+      <li><a href="/index/list?currentPage=1&paixu=b_score">商户</a></li>
+      <li><a href="/index/category?currentPage=1&paixu=f_price">美食</a></li>
    <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
  </nav>
@@ -61,19 +60,19 @@ Author URI: http://www.deathghost.cn
 <!--Start content-->
 <section class="Psection">
     <section class="Fslmenu">
-        <a id="f_id" title="默认排序" href="category?currentPage=1&paixu=f_id">
+        <a id="f_id" title="默认排序" href="/index/category?currentPage=1&paixu=f_id">
           <span>
           <span>默认排序</span>
           <span></span>
           </span>
         </a>
-        <a id="f_sales_volume" title="评价" href="category?currentPage=1&paixu=f_sales_volume">
+        <a id="f_sales_volume" title="评价" href="/index/category?currentPage=1&paixu=f_sales_volume">
           <span>
           <span>销量</span>
           <span class="s-up"></span>
           </span>
         </a>
-        <a id="f_price" title="销量" href="category?currentPage=1&paixu=f_price">
+        <a id="f_price" title="销量" href="/index/category?currentPage=1&paixu=f_price">
           <span>
           <span>价格</span>
           <span class="s-up"></span>
@@ -93,60 +92,6 @@ Author URI: http://www.deathghost.cn
        </a>
        </li>
       </tr>
-   <!--<li> -->
-   <!--<a href="detailsp.html" target="_blank" title="酸辣土豆丝">-->
-   <!--<img src="upload/06.jpg">-->
-   <!--<p class="Overflow">酸辣土豆丝</p>-->
-   <!--<p class="Overflow">赠送：<span class="CorRed Font16">2</span>积分<i></i></p>-->
-   <!--<p class="Overflow">好味来快餐连锁店</p>-->
-   <!--<p class="Overflow">地址：莲湖区土门十字往西100米</p>-->
-   <!--</a>-->
-   <!--</li>-->
-   <!--<li> -->
-   <!--<a href="detailsp.html" target="_blank" title="酸辣土豆丝">-->
-   <!--<img src="upload/04.jpg">-->
-   <!--<p class="Overflow">酸辣土豆丝</p>-->
-   <!--<p class="Overflow">赠送：<span class="CorRed Font16">2</span>积分<i></i></p>-->
-   <!--<p class="Overflow">好味来快餐连锁店</p>-->
-   <!--<p class="Overflow">地址：莲湖区土门十字往西100米</p>-->
-   <!--</a>-->
-   <!--</li>-->
-   <!--<li> -->
-   <!--<a href="detailsp.html" target="_blank" title="酸辣土豆丝">-->
-   <!--<img src="upload/02.jpg">-->
-   <!--<p class="Overflow">酸辣土豆丝</p>-->
-   <!--<p class="Overflow">赠送：<span class="CorRed Font16">2</span>积分<i></i></p>-->
-   <!--<p class="Overflow">好味来快餐连锁店</p>-->
-   <!--<p class="Overflow">地址：莲湖区土门十字往西100米</p>-->
-   <!--</a>-->
-   <!--</li>-->
-   <!--<li> -->
-   <!--<a href="detailsp.html" target="_blank" title="酸辣土豆丝">-->
-   <!--<img src="upload/02.jpg">-->
-   <!--<p class="Overflow">酸辣土豆丝</p>-->
-   <!--<p class="Overflow">赠送：<span class="CorRed Font16">2</span>积分<i></i></p>-->
-   <!--<p class="Overflow">好味来快餐连锁店</p>-->
-   <!--<p class="Overflow">地址：莲湖区土门十字往西100米</p>-->
-   <!--</a>-->
-   <!--</li>-->
-   <!--<li> -->
-   <!--<a href="detailsp.html" target="_blank" title="酸辣土豆丝">-->
-   <!--<img src="upload/01.jpg">-->
-   <!--<p class="Overflow">酸辣土豆丝</p>-->
-   <!--<p class="Overflow">赠送：<span class="CorRed Font16">2</span>积分<i></i></p>-->
-   <!--<p class="Overflow">好味来快餐连锁店</p>-->
-   <!--<p class="Overflow">地址：莲湖区土门十字往西100米</p>-->
-   <!--</a>-->
-   <!--</li>-->
-   <!--<li> -->
-   <!--<a href="detailsp.html" target="_blank" title="酸辣土豆丝">-->
-   <!--<img src="upload/03.jpg">-->
-   <!--<p class="Overflow">酸辣土豆丝</p>-->
-   <!--<p class="Overflow">赠送：<span class="CorRed Font16">2</span>积分<i></i></p>-->
-   <!--<p class="Overflow">好味来快餐连锁店</p>-->
-   <!--<p class="Overflow">地址：莲湖区土门十字往西100米</p>-->
-   <!--</a>-->
-   <!--</li>-->
    <!--<li> -->
    <!--<a href="detailsp.html" target="_blank" title="酸辣土豆丝">-->
    <!--<img src="upload/02.jpg">-->
@@ -176,26 +121,13 @@ Author URI: http://www.deathghost.cn
   <div class="Hot_shop">
    <span class="Hshoptile Font14 FontW Block">热门商家</span>
    <ul>
+    <tr th:each="shop : ${othershop}">
     <li>
-     <a href="shop.html" target="_blank" title="好味来快餐连锁店"><img src="upload/cc.jpg"></a>
-     <p class="Font14 FontW Overflow Lineheight35"><a href="shop.html" target="_blank" title="好味来快餐连锁店">好味来快餐连锁店</a></p>
-     <p class="Lineheight35 Overflow"><span title="通过动态控制地址的字符数量...">地址：西安市莲湖区土门新市场斜对面...</span></p>
+     <a th:href="'/index/shop?shopid=' + ${shop.b_id}" title="好味来快餐连锁店"><img th:src="@{'/static/upload/' + ${shop.b_pic}}"></a>
+     <p class="Font14 FontW Overflow Lineheight35"><a th:href="'/index/shop?shopid=' + ${shop.b_id}" th:text="${shop.b_name}">好味来快餐连锁店</a></p>
+     <p class="Lineheight35 Overflow"><span title="通过动态控制地址的字符数量..." th:text="'地址：' + ${shop.b_address}">地址：西安市莲湖区土门新市场斜对面...</span></p>
     </li>
-    <li>
-     <a href="shop.html" target="_blank" title="好味来快餐连锁店"><img src="upload/dd.jpg"></a>
-     <p class="Font14 FontW Overflow Lineheight35"><a href="shop.html" target="_blank" title="好味来快餐连锁店">好味来快餐连锁店</a></p>
-     <p class="Lineheight35 Overflow"><span title="通过动态控制地址的字符数量...">地址：西安市莲湖区土门新市场斜对面...</span></p>
-    </li>
-    <li>
-     <a href="shop.html" target="_blank" title="好味来快餐连锁店"><img src="upload/ee.jpg"></a>
-     <p class="Font14 FontW Overflow Lineheight35"><a href="shop.html" target="_blank" title="好味来快餐连锁店">好味来快餐连锁店</a></p>
-     <p class="Lineheight35 Overflow"><span title="通过动态控制地址的字符数量...">地址：西安市莲湖区土门新市场斜对面...</span></p>
-    </li>
-    <li>
-     <a href="shop.html" target="_blank" title="好味来快餐连锁店"><img src="upload/cc.jpg"></a>
-     <p class="Font14 FontW Overflow Lineheight35"><a href="shop.html" target="_blank" title="好味来快餐连锁店">好味来快餐连锁店</a></p>
-     <p class="Lineheight35 Overflow"><span title="通过动态控制地址的字符数量...">地址：西安市莲湖区土门新市场斜对面...</span></p>
-    </li>
+    </tr>
    </ul>
   </div>
  </aside>
@@ -224,7 +156,7 @@ Author URI: http://www.deathghost.cn
         function doSomething(pageno) {
             $.ajax({
                 type : "post",
-                url : "currentPage",
+                url : "/index/currentPage",
                 dataType: 'html',
                 data : {currentPage:pageno,paixu:paixu},
                 success : function (data) {
@@ -243,51 +175,6 @@ Author URI: http://www.deathghost.cn
   
  </div>
 <footer>
- <!--<section class="Otherlink">-->
-  <!--<aside>-->
-   <!--<div class="ewm-left">-->
-    <!--<p>手机扫描二维码：</p>-->
-    <!--<img src="images/Android_ico_d.gif">-->
-    <!--<img src="images/iphone_ico_d.gif">-->
-   <!--</div>-->
-   <!--<div class="tips">-->
-    <!--<p>客服热线</p>-->
-    <!--<p><i>1830927**73</i></p>-->
-    <!--<p>配送时间</p>-->
-    <!--<p><time>09：00</time>~<time>22:00</time></p>-->
-    <!--<p>网站公告</p>-->
-   <!--</div>-->
-  <!--</aside>-->
-  <!--<section>-->
-    <!--<div>-->
-    <!--<span><i class="i1"></i>配送支付</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<span><i class="i2"></i>关于我们</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<span><i class="i3"></i>帮助中心</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-  <!--</section>-->
- <!--</section>-->
 <div class="copyright">© 版权所有 2020 
 </footer>
 </body>

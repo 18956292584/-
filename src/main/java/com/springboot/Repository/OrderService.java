@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface OrderService {
-    List<Order> dfk(int userId,int state);
+    List<Order> dfk(String userId,int state);
 
     Object getorderModel(String order_id);
 
@@ -16,5 +16,13 @@ public interface OrderService {
     String submitOrder(Order order);
 
     String ckeckOrder(HttpServletRequest request, HttpServletResponse response);
+
+    void deleteOrder(String order_id);
+
+    void confirmReceipt(String order_id);
+
+    List<Order> dfkBus(String bus, int i);
+
+    void order_fh(String order_id);
 }
 

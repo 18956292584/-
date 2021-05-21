@@ -30,7 +30,17 @@ public class Business {
     private int b_monthly_sales;
     //商家配送费
     private boolean b_dismoney;
+    //商家登录密码
+    private String b_password;
 
+
+    public String getB_password() {
+        return b_password;
+    }
+
+    public void setB_password(String b_password) {
+        this.b_password = b_password;
+    }
 
     public int getB_id() {
         return b_id;

@@ -26,10 +26,10 @@ Author URI: http://www.deathghost.cn
  <section class="Topmenubg">
   <div class="Topnav">
    <div class="LeftNav">
-    <a href="register.html">注册</a>/<a href="login.html">登录</a>
+    <a href="/user/register">注册</a>/<a href="/user/login">登录</a>
    </div>
    <div class="RightNav">
-    <a href="user_center.html">用户中心</a> <a href="user_orderlist.html" target="_blank" title="我的订单">我的订单</a> <a href="cart.html">购物车（0）</a> <a href="user_favorites.html" target="_blank" title="我的收藏">我的收藏</a> <a href="#">商家入驻</a>
+    <a href="/user/user_center">用户中心</a> <a href="/user/user_center" title="我的订单">我的订单</a> <a href="/user/cart">购物车</a><a href="/business/BusLoad">商家登录</a>
    </div>
   </div>
  </section>
@@ -41,14 +41,14 @@ Author URI: http://www.deathghost.cn
   </div>
   <div class="Search"> 
    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
-   <div class="Search_nav" id="selectsearch">
-    <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
-    <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
-   </div>
-   <div class="Search_area"> 
-   <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
-   <input type="submit" class="searchbutton" value="搜 索" />
-   </div>
+    <div class="Search_nav" id="selectsearch">
+     <a href="javascript:;" onClick="selectsearch(this,'restaurant_name')" class="choose">餐厅</a>
+     <a href="javascript:;" onClick="selectsearch(this,'food_name')">食物名</a>
+    </div>
+    <div class="Search_area">
+    <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称或食物名称..." class="searchbox" />
+    <input type="submit" class="searchbutton" value="搜 索" />
+    </div>
    </form>
    <!--<p class="hotkeywords"><a href="#" title="酸辣土豆丝">酸辣土豆丝</a><a href="#" title="这里是产品名称">螃蟹炒年糕</a><a href="#" title="这里是产品名称">牛奶炖蛋</a><a href="#" title="这里是产品名称">芝麻酱凉面</a><a href="#" title="这里是产品名称">滑蛋虾仁</a><a href="#" title="这里是产品名称">蒜汁茄子</a></p>-->
   </div>
@@ -56,8 +56,8 @@ Author URI: http://www.deathghost.cn
  <nav class="menu_bg">
   <ul class="menu">
       <li><a href="javascript:location.reload();">首页</a></li>
-      <li><a href="list">商户</a></li>
-      <li><a href="category?currentPage=1&paixu=f_price">美食</a></li>
+      <li><a href="/index/list?currentPage=1&paixu=b_score">商户</a></li>
+      <li><a href="/index/category?currentPage=1&paixu=f_price">美食</a></li>
    <!--<li><a href="category.html">积分商城</a></li>-->
    <!--<li><a href="article_read.html">关于我们</a></li>-->
   </ul>
@@ -70,13 +70,13 @@ Author URI: http://www.deathghost.cn
   <div class="C-time">
    <img src="../static/upload/dc.jpg"/>
   </div>
-  <a href="list.html" target="_blank"><img src="../static/images/by_button.png"></a>
-  <a href="list.html" target="_blank"><img src="../static/images/dc_button.png"></a>
+  <a href="/index/category?currentPage=1&paixu=f_price" target="_blank"><img src="/static/images/by_button.png"></a>
+  <a href="/index/list?currentPage=1&paixu=b_score" target="_blank"><img src="/static/images/dc_button.png"></a>
  </aside>
  <div class="F-middle">
  <ul class="rslides f426x240">
        <tr th:each="food : ${top3food}">
-        <li><a th:href="'/index/detailsp?foodid=' + ${food.f_id}"><img th:src="@{'../static/upload/' + ${food.f_pic}}"/></a></li>
+        <li><a th:href="'/index/detailsp?foodid=' + ${food.f_id}"><img th:src="@{'/static/upload/' + ${food.f_pic}}"/></a></li>
        </tr>
     </ul>
  </div>
@@ -86,23 +86,23 @@ Author URI: http://www.deathghost.cn
    <!--<li><i></i><a href="article_read.html" target="_blank" title="这里调用新闻标题...">欢迎访问DeathGhost博客站...</a></li>-->
    <!--<li><i></i><a href="article_read.html" target="_blank" title="这里调用新闻标题...">H5WEB前端开发 移动WEB模板设计...</a></li>-->
   <!--</ul>-->
-  <ul class="Orderlist" id="UpRoll">
-   <li>
-   <p>订单编号：2014090912973</p>
-   <p>收件人：王先生</p>
-   <p>订单状态：<i class="State01">已发货</i></p>
-   </li>
-   <li>
-   <p>订单编号：2014090912978</p>
-   <p>收件人：张小姐</p>
-   <p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>
-   </li>
-   <li>
-   <p>订单编号：2014090912988</p>
-   <p>收件人：龚先生</p>
-   <p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>
-   </li>
-  </ul>
+  <!--<ul class="Orderlist" id="UpRoll">-->
+   <!--<li>-->
+   <!--<p>订单编号：2014090912973</p>-->
+   <!--<p>收件人：王先生</p>-->
+   <!--<p>订单状态：<i class="State01">已发货</i></p>-->
+   <!--</li>-->
+   <!--<li>-->
+   <!--<p>订单编号：2014090912978</p>-->
+   <!--<p>收件人：张小姐</p>-->
+   <!--<p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>-->
+   <!--</li>-->
+   <!--<li>-->
+   <!--<p>订单编号：2014090912988</p>-->
+   <!--<p>收件人：龚先生</p>-->
+   <!--<p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>-->
+   <!--</li>-->
+  <!--</ul>-->
   <script>
    var UpRoll = document.getElementById('UpRoll');
    var lis = UpRoll.getElementsByTagName('li');
@@ -139,21 +139,6 @@ Author URI: http://www.deathghost.cn
   <div id="Indexcontent">
    <ul style="display:block;">
     <li>
-     <!--<p class="seekarea">
-     <a href="#">碑林区</a>
-     <a href="#">新城区</a>
-     <a href="#">未央区</a>
-     <a href="#">雁塔区</a>
-     <a href="#">莲湖区</a>
-     <a href="#">高新区</a>
-     <a href="#">灞桥区</a>
-     <a href="#">高陵区</a>
-     <a href="#">阎良区</a>
-     <a href="#">临潼区</a>
-     <a href="#">长安区</a>
-     <a href="#">周至县</a>
-     <a href="#">蓝田县 </a>
-     </p>-->
      <div class="SCcontent">
       <tr th:each="food : ${allfood}">
        <!--<td th:text="${user.name}">tyrone</td>-->
@@ -202,27 +187,14 @@ Author URI: http://www.deathghost.cn
    </ul>
    <ul>
   <li>
-     <!--<p class="seekarea">
-     <a href="#">碑林区</a>
-     <a href="#">新城区</a>
-     <a href="#">未央区</a>
-     <a href="#">雁塔区</a>
-     <a href="#">莲湖区</a>
-     <a href="#">高新区</a>
-     <a href="#">灞桥区</a>
-     <a href="#">高陵区</a>
-     <a href="#">阎良区</a>
-     <a href="#">临潼区</a>
-     <a href="#">长安区</a>
-     <a href="#">周至县</a>
-     <a href="#">蓝田县 </a>
+
      </p>-->
      <div class="DCcontent">
       <tr th:each="business : ${allbusiness}">
 
-       <a th:href="@{'shop?shopid='+${business.b_id}}" target="_blank" title="TITLE:店名">
+       <a th:href="@{'/index/shop?shopid='+${business.b_id}}" target="_blank" title="TITLE:店名">
         <figure>
-         <img th:src="@{'../static/upload/' + ${business.b_pic}}">
+         <img th:src="@{'/static/upload/' + ${business.b_pic}}">
          <figcaption>
           <span class="title" th:text="${business.b_name}">店名</span>
           <span class="price">月售量：<i th:text="${business.b_monthly_sales}"></i>&nbsp&nbsp份</span>
@@ -286,6 +258,7 @@ Author URI: http://www.deathghost.cn
  </aside>
 </section>
 <script language=javascript>
+
  //添加cookie
  function setCookie(name,value,time){
   var date= new Date();
@@ -320,52 +293,7 @@ Author URI: http://www.deathghost.cn
   
  </div>
 <footer>
- <!--<section class="Otherlink">-->
-  <!--<aside>-->
-   <!--<div class="ewm-left">-->
-    <!--<p>手机扫描二维码：</p>-->
-    <!--<img src="images/Android_ico_d.gif">-->
-    <!--<img src="images/iphone_ico_d.gif">-->
-   <!--</div>-->
-   <!--<div class="tips">-->
-    <!--<p>客服热线</p>-->
-    <!--<p><i>1830927**73</i></p>-->
-    <!--<p>配送时间</p>-->
-    <!--<p><time>09：00</time>~<time>22:00</time></p>-->
-    <!--<p>网站公告</p>-->
-   <!--</div>-->
-  <!--</aside>-->
-  <!--<section>-->
-    <!--<div>-->
-    <!--<span><i class="i1"></i>配送支付</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">支付方式</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送方式</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务费用</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<span><i class="i2"></i>关于我们</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">招贤纳士</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">网站介绍</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">配送效率</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">商家加盟</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--<span><i class="i3"></i>帮助中心</span>-->
-    <!--<ul>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务内容</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">服务介绍</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">常见问题</a></li>-->
-     <!--<li><a href="article_read.html" target="_blank" title="标题">网站地图</a></li>-->
-    <!--</ul>-->
-    <!--</div>-->
-  <!--</section>-->
- <!--</section>-->
-<div class="copyright">© 版权所有 2020 
+<div class="copyright">© 版权所有 西安邮电大学
 </footer>
 <style>
 .copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
