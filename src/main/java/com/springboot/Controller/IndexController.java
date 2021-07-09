@@ -1,25 +1,17 @@
 package com.springboot.Controller;
 
-import com.alipay.api.AlipayApiException;
-import com.springboot.Repository.Impl.PayAction;
 import com.springboot.Repository.Impl.Util;
 import com.springboot.Repository.IndexService;
 import com.springboot.Repository.OrderService;
 import com.springboot.Repository.UserService;
-import com.springboot.entity.Gwc;
-import com.springboot.entity.Order;
-import com.springboot.entity.OrderModel;
 import com.springboot.entity.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("index")
@@ -51,7 +43,6 @@ public class IndexController {
     @RequestMapping("/category")
     public ModelAndView category(Page page){
         ModelAndView modelAndView = new ModelAndView("category");
-        //购物车所有商品
         modelAndView.addObject("allfood",indexService.allFood(page));
         modelAndView.addObject("othershop",indexService.otherShop());
         modelAndView.addObject("page",indexService.setAllfoodPage(page));
@@ -60,11 +51,10 @@ public class IndexController {
     }
 
     //美食页面
-    //访问地址： http://localhost:9090/index/category?currentPage=1&paixu=f_id
+    //访问地址： http://localhost:9090/index/currentPage?currentPage=1&paixu=f_id
     @RequestMapping("/currentPage")
     public ModelAndView currentPage(Page page){
         ModelAndView modelAndView = new ModelAndView("categoryPage");
-        //购物车所有商品
         modelAndView.addObject("allfood",indexService.allFood(page));
         modelAndView.addObject("page",indexService.setAllfoodPage(page));
 

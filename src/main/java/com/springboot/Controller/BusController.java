@@ -166,7 +166,7 @@ public class BusController {
     //访问地址： localhost:9090/business/changeFood
     @RequestMapping("/changeFood")
     public void changeFood(Food food, HttpServletResponse response,
-                        HttpServletRequest request) throws IOException {
+                           HttpServletRequest request) throws IOException {
         busService.changeFood(food);
 
         response.sendRedirect("/business/ProductManagement?state=1");

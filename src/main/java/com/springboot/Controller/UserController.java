@@ -9,10 +9,8 @@ import com.springboot.Repository.UserService;
 import com.springboot.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +19,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -76,14 +73,12 @@ public class UserController {
                               HttpSession session
                         ) throws IOException, ServletException {
 
-        //System.out.println(user);
         String user_login = userService.dealLogin(user);
         //登录成功，将用户存入cookie和session
         if (user_login.equals("登录成功")){
             String user_uuid = UUID.randomUUID().toString().replace("-", "");
-
             Cookie cookie = new Cookie("user_id", user.getUser_id());
-            //cookie有效期三天
+            //cookie有效期3小时
             cookie.setMaxAge(60*60*3);
             cookie.setPath("/");
             //发送到客户端
@@ -97,8 +92,6 @@ public class UserController {
             request.getRequestDispatcher("login?res=" +  URLEncoder.encode(user_login,"utf-8")).forward(request, response);
         }
     }
-
-
 
     //购物车
     //访问地址： localhost:9090/user/cart
@@ -292,7 +285,6 @@ public class UserController {
         return modelAndView;
     }
 
-
     //查询是否支付成功
     @RequestMapping("/request")
     public void request(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -300,14 +292,12 @@ public class UserController {
         response.sendRedirect("user_center?userId=" + res);
     }
 
-
     //删除订单
     @RequestMapping("/deleteOrder")
     public void deleteOrder(String order_id,HttpServletRequest request, HttpServletResponse response) throws IOException {
         orderService.deleteOrder(order_id);
         response.sendRedirect("/user/user_center?");
     }
-
 
     //用户评价
     @RequestMapping("/user_pj")
@@ -318,7 +308,6 @@ public class UserController {
         modelAndView.addObject("order_id",order_id);
         return modelAndView;
     }
-
 
     @RequestMapping("/pjFood")
     public void user_pj(@RequestParam(value = "e_food_id")ArrayList<Integer> e_food_id,
@@ -351,8 +340,4 @@ public class UserController {
 
         response.sendRedirect("/index/");
     }
-
-
-
-
 }

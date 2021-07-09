@@ -5,14 +5,10 @@ import com.springboot.entity.*;
 import com.springboot.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Parameter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -60,6 +56,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public String dealLogin(User user) {
+
         //通过用户账号获取用户
         User user_login = userMapper.getUser(user.getUser_id());
         //获取失败
@@ -153,6 +150,4 @@ public class UserServiceImpl implements UserService {
         orderMapper.setOrderState(e_order_id.get(0),4);
 
     }
-
-
 }
