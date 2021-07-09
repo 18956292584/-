@@ -57,7 +57,6 @@ public class BusController {
         String user_login = busService.dealLogin(idPasswordModel);
         //登录成功，将用户存入cookie和session
         if (user_login.equals("登录成功")){
-
             Cookie cookie = new Cookie("BUS", "BUS" + idPasswordModel.getId());
             //cookie有效期三天
             cookie.setMaxAge(60*60*3);
